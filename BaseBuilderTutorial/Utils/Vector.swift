@@ -15,6 +15,10 @@ struct Vector {
         Vector(x: 0, y: 0)
     }
     
+    static var right: Vector {
+        Vector(x: 1, y: 0)
+    }
+    
     static func +(lhs: Vector, rhs: Vector) -> Vector {
         Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
     }

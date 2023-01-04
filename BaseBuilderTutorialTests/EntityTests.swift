@@ -45,7 +45,35 @@ final class EntityTests: XCTestCase {
         XCTAssertEqual(world.tiles[.zero, default: .void], .Floor)
         
         XCTAssertEqual(entity.jobs.count, 0)
+    }
+    
+    // MARK: Requirements
+    func testUnmetRequirementsDontLowerCycleTime() {
+        let world = World()
+        XCTAssertEqual(world.tiles.count, 0)
         
+        let entity = Entity(name: "Example Entity", position: .zero)
+        let job = Job(jobGoal: .changeTile(.Floor), targetPosition: .right, buildTime: 2, requirements: [.position])
+        entity.jobs.push(job)
+        
+        XCTAssertEqual(entity.jobs.peek()?.buildTime ?? 0, 2)
+        
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.jobs[0].buildTime, 2)
+    }
+    
+    func testMetRequirementsLowerCycleTime() {
+        let world = World()
+        let entity = Entity(name: "Example Entity", position: .zero)
+        let job = Job(jobGoal: .changeTile(.Wall), targetPosition: .zero, buildTime: 2, requirements: [.position])
+        entity.jobs.push(job)
+        
+        world.setTile(position: .zero, tile: .Floor)
+
+        XCTAssertEqual(entity.jobs.peek()?.buildTime ?? 0, 2)
+        entity.update(in: world)
+        XCTAssertEqual(entity.jobs.peek()?.buildTime ?? 0, 1)
     }
 
 }
