@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA132965AAAA00273E5A /* AppDelegate.swift */; };
-		DE74BA162965AAAA00273E5A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DE74BA152965AAAA00273E5A /* GameScene.sks */; };
-		DE74BA182965AAAA00273E5A /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = DE74BA172965AAAA00273E5A /* Actions.sks */; };
 		DE74BA1A2965AAAA00273E5A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA192965AAAA00273E5A /* GameScene.swift */; };
 		DE74BA1C2965AAAA00273E5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA1B2965AAAA00273E5A /* ViewController.swift */; };
 		DE74BA1E2965AAAD00273E5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE74BA1D2965AAAD00273E5A /* Assets.xcassets */; };
@@ -17,6 +15,15 @@
 		DE74BA2C2965AAAD00273E5A /* BaseBuilderTutorialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA2B2965AAAD00273E5A /* BaseBuilderTutorialTests.swift */; };
 		DE74BA362965AAAD00273E5A /* BaseBuilderTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA352965AAAD00273E5A /* BaseBuilderTutorialUITests.swift */; };
 		DE74BA382965AAAD00273E5A /* BaseBuilderTutorialUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA372965AAAD00273E5A /* BaseBuilderTutorialUITestsLaunchTests.swift */; };
+		DE74BA462965AB2F00273E5A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA452965AB2F00273E5A /* Tile.swift */; };
+		DE74BA482965AB6600273E5A /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA472965AB6600273E5A /* Entity.swift */; };
+		DE74BA4B2965AB8E00273E5A /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA4A2965AB8E00273E5A /* Vector.swift */; };
+		DE74BA4D2965AC2E00273E5A /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA4C2965AC2E00273E5A /* Stack.swift */; };
+		DE74BA4F2965AD4D00273E5A /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA4E2965AD4D00273E5A /* Job.swift */; };
+		DE74BA512965ADCB00273E5A /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA502965ADCB00273E5A /* World.swift */; };
+		DE74BA532965AE1E00273E5A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA522965AE1E00273E5A /* Queue.swift */; };
+		DE74BA552965B11100273E5A /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA542965B11100273E5A /* EntityTests.swift */; };
+		DE74BA572965B25F00273E5A /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA562965B25F00273E5A /* WorldTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +46,6 @@
 /* Begin PBXFileReference section */
 		DE74BA102965AAAA00273E5A /* BaseBuilderTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseBuilderTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE74BA132965AAAA00273E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DE74BA152965AAAA00273E5A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		DE74BA172965AAAA00273E5A /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		DE74BA192965AAAA00273E5A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		DE74BA1B2965AAAA00273E5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DE74BA1D2965AAAD00273E5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +56,15 @@
 		DE74BA312965AAAD00273E5A /* BaseBuilderTutorialUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseBuilderTutorialUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE74BA352965AAAD00273E5A /* BaseBuilderTutorialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBuilderTutorialUITests.swift; sourceTree = "<group>"; };
 		DE74BA372965AAAD00273E5A /* BaseBuilderTutorialUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBuilderTutorialUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DE74BA452965AB2F00273E5A /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		DE74BA472965AB6600273E5A /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		DE74BA4A2965AB8E00273E5A /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		DE74BA4C2965AC2E00273E5A /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		DE74BA4E2965AD4D00273E5A /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		DE74BA502965ADCB00273E5A /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		DE74BA522965AE1E00273E5A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		DE74BA542965B11100273E5A /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
+		DE74BA562965B25F00273E5A /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +115,9 @@
 		DE74BA122965AAAA00273E5A /* BaseBuilderTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				DE74BA492965AB8500273E5A /* Utils */,
+				DE74BA442965AB2000273E5A /* Model */,
 				DE74BA132965AAAA00273E5A /* AppDelegate.swift */,
-				DE74BA152965AAAA00273E5A /* GameScene.sks */,
-				DE74BA172965AAAA00273E5A /* Actions.sks */,
 				DE74BA192965AAAA00273E5A /* GameScene.swift */,
 				DE74BA1B2965AAAA00273E5A /* ViewController.swift */,
 				DE74BA1D2965AAAD00273E5A /* Assets.xcassets */,
@@ -117,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				DE74BA2B2965AAAD00273E5A /* BaseBuilderTutorialTests.swift */,
+				DE74BA542965B11100273E5A /* EntityTests.swift */,
+				DE74BA562965B25F00273E5A /* WorldTests.swift */,
 			);
 			path = BaseBuilderTutorialTests;
 			sourceTree = "<group>";
@@ -128,6 +144,27 @@
 				DE74BA372965AAAD00273E5A /* BaseBuilderTutorialUITestsLaunchTests.swift */,
 			);
 			path = BaseBuilderTutorialUITests;
+			sourceTree = "<group>";
+		};
+		DE74BA442965AB2000273E5A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DE74BA452965AB2F00273E5A /* Tile.swift */,
+				DE74BA472965AB6600273E5A /* Entity.swift */,
+				DE74BA4E2965AD4D00273E5A /* Job.swift */,
+				DE74BA502965ADCB00273E5A /* World.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DE74BA492965AB8500273E5A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DE74BA4A2965AB8E00273E5A /* Vector.swift */,
+				DE74BA4C2965AC2E00273E5A /* Stack.swift */,
+				DE74BA522965AE1E00273E5A /* Queue.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,9 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE74BA162965AAAA00273E5A /* GameScene.sks in Resources */,
 				DE74BA1E2965AAAD00273E5A /* Assets.xcassets in Resources */,
-				DE74BA182965AAAA00273E5A /* Actions.sks in Resources */,
 				DE74BA212965AAAD00273E5A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,9 +297,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE74BA512965ADCB00273E5A /* World.swift in Sources */,
 				DE74BA1C2965AAAA00273E5A /* ViewController.swift in Sources */,
+				DE74BA482965AB6600273E5A /* Entity.swift in Sources */,
+				DE74BA4D2965AC2E00273E5A /* Stack.swift in Sources */,
 				DE74BA1A2965AAAA00273E5A /* GameScene.swift in Sources */,
+				DE74BA532965AE1E00273E5A /* Queue.swift in Sources */,
 				DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */,
+				DE74BA4B2965AB8E00273E5A /* Vector.swift in Sources */,
+				DE74BA462965AB2F00273E5A /* Tile.swift in Sources */,
+				DE74BA4F2965AD4D00273E5A /* Job.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +314,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE74BA572965B25F00273E5A /* WorldTests.swift in Sources */,
+				DE74BA552965B11100273E5A /* EntityTests.swift in Sources */,
 				DE74BA2C2965AAAD00273E5A /* BaseBuilderTutorialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

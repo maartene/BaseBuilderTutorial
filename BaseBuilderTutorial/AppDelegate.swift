@@ -7,10 +7,12 @@
 
 
 import Cocoa
+import OSLog
+
+let logger = Logger(subsystem: "eu.thedreamweb.BaseBuilderTutorial", category: "BaseBuilderTutorial")
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
