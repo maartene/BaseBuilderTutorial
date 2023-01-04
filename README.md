@@ -1,7 +1,7 @@
 # BaseBuilderTutorial
 Source code for the SpriteKit/SwiftUI Base Builder Tutorial series on [YouTube](https://www.youtube.com/playlist?list=PLhUrOtMlcKDAwFj7p5c7InLojgY1PDon2)
 
-Goal: Use Swift and SpriteKit to create the basis of a Base Building game (like Prison Architect, RimWorld or Academia School Simulator)
+Goal: Use Swift and SpriteKit to create the basics of a Base Building game (like Prison Architect, RimWorld or Academia School Simulator)
 
 ## Learn
 * Integrating SpriteKit and SwiftUI
@@ -23,4 +23,4 @@ Get the sprites [here](http://maartene.github.io/resources/BaseBuilderTutorial/G
 * Wrap up
 
 ## Licensed assets
-* Uses the RogueLike and Roguelike Indoor asset packs by [Kenney](www.kenney.nl)
+* Uses the [Roguelike RPG](https://kenney.nl/assets/roguelike-rpg-pack) and [Roguelike Indoors](https://kenney.nl/assets/roguelike-indoors) asset packs by [Kenney](www.kenney.nl)
