@@ -23,6 +23,7 @@ struct Job {
     enum JobGoal {
         case changeTile(Tile)
         case moveToLocation
+        case fetchItems(ItemStack)
     }
 }
 
@@ -40,5 +41,9 @@ extension Job: CustomStringConvertible {
 extension Job {
     static func createMoveToLocationJob(targetLocation: Vector) -> Job {
         Job(jobGoal: .moveToLocation, targetPosition: targetLocation, buildTime: 1)
+    }
+    
+    static func createFetchItemsJob(itemsToFetch: ItemStack, targetLocation: Vector) -> Job {
+        Job(jobGoal: .fetchItems(itemsToFetch), targetPosition: targetLocation, buildTime: 1, requirements: [.position])
     }
 }
