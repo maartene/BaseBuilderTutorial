@@ -1,0 +1,13 @@
+//
+//  ItemStack.swift
+//  BaseBuilderTutorial
+//
+//  Created by Maarten Engels on 04/01/2023.
+//
+
+import Foundation
+
+struct ItemStack {
+    let item: Item
+    var amount: Int
+}

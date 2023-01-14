@@ -24,6 +24,11 @@
 		DE74BA532965AE1E00273E5A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA522965AE1E00273E5A /* Queue.swift */; };
 		DE74BA552965B11100273E5A /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA542965B11100273E5A /* EntityTests.swift */; };
 		DE74BA572965B25F00273E5A /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA562965B25F00273E5A /* WorldTests.swift */; };
+		DEA839052965E17B0012F08D /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839042965E17B0012F08D /* Requirement.swift */; };
+		DEA839072965E4080012F08D /* JobTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839062965E4080012F08D /* JobTests.swift */; };
+		DEA839092965F14A0012F08D /* RequirementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839082965F14A0012F08D /* RequirementTests.swift */; };
+		DEA8390B2965F2450012F08D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8390A2965F2450012F08D /* Item.swift */; };
+		DEA8390D2965F2550012F08D /* ItemStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8390C2965F2550012F08D /* ItemStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +70,11 @@
 		DE74BA522965AE1E00273E5A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DE74BA542965B11100273E5A /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
 		DE74BA562965B25F00273E5A /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
+		DEA839042965E17B0012F08D /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
+		DEA839062965E4080012F08D /* JobTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobTests.swift; sourceTree = "<group>"; };
+		DEA839082965F14A0012F08D /* RequirementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementTests.swift; sourceTree = "<group>"; };
+		DEA8390A2965F2450012F08D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		DEA8390C2965F2550012F08D /* ItemStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +143,8 @@
 				DE74BA2B2965AAAD00273E5A /* BaseBuilderTutorialTests.swift */,
 				DE74BA542965B11100273E5A /* EntityTests.swift */,
 				DE74BA562965B25F00273E5A /* WorldTests.swift */,
+				DEA839062965E4080012F08D /* JobTests.swift */,
+				DEA839082965F14A0012F08D /* RequirementTests.swift */,
 			);
 			path = BaseBuilderTutorialTests;
 			sourceTree = "<group>";
@@ -153,6 +165,9 @@
 				DE74BA472965AB6600273E5A /* Entity.swift */,
 				DE74BA4E2965AD4D00273E5A /* Job.swift */,
 				DE74BA502965ADCB00273E5A /* World.swift */,
+				DEA839042965E17B0012F08D /* Requirement.swift */,
+				DEA8390A2965F2450012F08D /* Item.swift */,
+				DEA8390C2965F2550012F08D /* ItemStack.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,6 +316,9 @@
 				DE74BA1C2965AAAA00273E5A /* ViewController.swift in Sources */,
 				DE74BA482965AB6600273E5A /* Entity.swift in Sources */,
 				DE74BA4D2965AC2E00273E5A /* Stack.swift in Sources */,
+				DEA8390B2965F2450012F08D /* Item.swift in Sources */,
+				DEA8390D2965F2550012F08D /* ItemStack.swift in Sources */,
+				DEA839052965E17B0012F08D /* Requirement.swift in Sources */,
 				DE74BA1A2965AAAA00273E5A /* GameScene.swift in Sources */,
 				DE74BA532965AE1E00273E5A /* Queue.swift in Sources */,
 				DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */,
@@ -317,6 +335,8 @@
 				DE74BA572965B25F00273E5A /* WorldTests.swift in Sources */,
 				DE74BA552965B11100273E5A /* EntityTests.swift in Sources */,
 				DE74BA2C2965AAAD00273E5A /* BaseBuilderTutorialTests.swift in Sources */,
+				DEA839072965E4080012F08D /* JobTests.swift in Sources */,
+				DEA839092965F14A0012F08D /* RequirementTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
