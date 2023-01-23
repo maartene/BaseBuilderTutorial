@@ -38,4 +38,45 @@ final class World {
         return nil
     }
     
+    
+    // MARK: Demo world
+    static func makeDemoWorld() -> World {
+        let newWorld = World()
+        
+        newWorld.makeRoom(bottomLeft: Vector(x: -5, y: -3), topRight: Vector(x: 5, y: 3))
+        
+        // Show changes to world
+        newWorld.makeRoomJobs(bottomLeft: Vector(x: -10, y: 6), topRight: Vector(x: -4, y: 10))
+        let entity = Entity(name: "Worker", position: .zero)
+        newWorld.entities = [entity]
+        
+        return newWorld
+    }
+    
+    func makeRoom(bottomLeft: Vector, topRight: Vector) {
+        for r in bottomLeft.y ... topRight.y {
+            for c in bottomLeft.x ... topRight.x {
+                if r == bottomLeft.y || r == topRight.y || c == bottomLeft.x || c == topRight.x {
+                    setTile(position: Vector(x: c, y: r), tile: .Wall)
+                } else {
+                    setTile(position: Vector(x: c, y: r), tile: .Floor)
+                }
+            }
+        }
+    }
+    
+    func makeRoomJobs(bottomLeft: Vector, topRight: Vector) {
+        for r in bottomLeft.y ... topRight.y {
+            for c in bottomLeft.x ... topRight.x {
+                if r == bottomLeft.y || r == topRight.y || c == bottomLeft.x || c == topRight.x {
+                    //setTile(position: Vector(x: c, y: r), tile: .Wall)
+                    jobs.enqueue(Job(jobGoal: .changeTile(.Wall), targetPosition: Vector(x: c, y: r)))
+                } else {
+                    //setTile(position: Vector(x: c, y: r), tile: .Floor)
+                    jobs.enqueue(Job(jobGoal: .changeTile(.Floor), targetPosition: Vector(x: c, y: r)))
+                }
+            }
+        }
+    }
+    
 }
