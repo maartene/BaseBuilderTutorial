@@ -8,10 +8,32 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    static let CELL_SIZE: CGFloat = 16
     
+    let world = World.makeDemoWorld()
+    
+    // Gameloop
+    var lastUpdateTime: TimeInterval = 0.0
+    let updateInterval: TimeInterval = 0.25
+    var remainingUpdateDelay: TimeInterval = 0.0
+    
+    // Sprite Managers
+    let tileSpriteManager = TileSpriteManager(cellSize: CELL_SIZE, zPosition: 0)
+    
+    // Some nodes
+    var cameraNode: SKCameraNode!
     
     override func didMove(to view: SKView) {
+        cameraNode = SKCameraNode()
+        cameraNode.position = CGPoint.zero
+        // cameraNode.setScale(cameraScale)
+        camera = cameraNode
         
+        redraw()
+    }
+    
+    func redraw() {
+        tileSpriteManager.redraw(world: world, in: self)
     }
     
     
@@ -50,5 +72,15 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        let deltaTime = currentTime - lastUpdateTime
+        lastUpdateTime = currentTime
+        remainingUpdateDelay -= deltaTime
+        
+        if remainingUpdateDelay <= 0 {
+            remainingUpdateDelay = updateInterval
+            world.update()
+            
+            redraw()
+        }
     }
 }

@@ -24,6 +24,8 @@
 		DE74BA532965AE1E00273E5A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA522965AE1E00273E5A /* Queue.swift */; };
 		DE74BA552965B11100273E5A /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA542965B11100273E5A /* EntityTests.swift */; };
 		DE74BA572965B25F00273E5A /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA562965B25F00273E5A /* WorldTests.swift */; };
+		DE9C275A2972B78000E5D3AB /* SpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C27592972B78000E5D3AB /* SpriteManager.swift */; };
+		DE9C275C2972B79D00E5D3AB /* TileSpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C275B2972B79D00E5D3AB /* TileSpriteManager.swift */; };
 		DEA839052965E17B0012F08D /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839042965E17B0012F08D /* Requirement.swift */; };
 		DEA839072965E4080012F08D /* JobTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839062965E4080012F08D /* JobTests.swift */; };
 		DEA839092965F14A0012F08D /* RequirementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839082965F14A0012F08D /* RequirementTests.swift */; };
@@ -70,6 +72,8 @@
 		DE74BA522965AE1E00273E5A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DE74BA542965B11100273E5A /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
 		DE74BA562965B25F00273E5A /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
+		DE9C27592972B78000E5D3AB /* SpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteManager.swift; sourceTree = "<group>"; };
+		DE9C275B2972B79D00E5D3AB /* TileSpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileSpriteManager.swift; sourceTree = "<group>"; };
 		DEA839042965E17B0012F08D /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
 		DEA839062965E4080012F08D /* JobTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobTests.swift; sourceTree = "<group>"; };
 		DEA839082965F14A0012F08D /* RequirementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementTests.swift; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 		DE74BA122965AAAA00273E5A /* BaseBuilderTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				DE9C27582972B73400E5D3AB /* View */,
 				DE74BA492965AB8500273E5A /* Utils */,
 				DE74BA442965AB2000273E5A /* Model */,
 				DE74BA132965AAAA00273E5A /* AppDelegate.swift */,
@@ -180,6 +185,15 @@
 				DE74BA522965AE1E00273E5A /* Queue.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		DE9C27582972B73400E5D3AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE9C27592972B78000E5D3AB /* SpriteManager.swift */,
+				DE9C275B2972B79D00E5D3AB /* TileSpriteManager.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,8 +334,10 @@
 				DEA8390D2965F2550012F08D /* ItemStack.swift in Sources */,
 				DEA839052965E17B0012F08D /* Requirement.swift in Sources */,
 				DE74BA1A2965AAAA00273E5A /* GameScene.swift in Sources */,
+				DE9C275A2972B78000E5D3AB /* SpriteManager.swift in Sources */,
 				DE74BA532965AE1E00273E5A /* Queue.swift in Sources */,
 				DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */,
+				DE9C275C2972B79D00E5D3AB /* TileSpriteManager.swift in Sources */,
 				DE74BA4B2965AB8E00273E5A /* Vector.swift in Sources */,
 				DE74BA462965AB2F00273E5A /* Tile.swift in Sources */,
 				DE74BA4F2965AD4D00273E5A /* Job.swift in Sources */,
