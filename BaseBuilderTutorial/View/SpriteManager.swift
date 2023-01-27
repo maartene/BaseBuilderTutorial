@@ -13,5 +13,5 @@ protocol SpriteManager {
     var zPosition: CGFloat { get }
     
     func redraw(world: World, in scene: SKScene)
-    // func cleanUp(world: World)
+    func cleanUp(world: World)
 }

@@ -70,10 +70,10 @@ final class World {
             for c in bottomLeft.x ... topRight.x {
                 if r == bottomLeft.y || r == topRight.y || c == bottomLeft.x || c == topRight.x {
                     //setTile(position: Vector(x: c, y: r), tile: .Wall)
-                    jobs.enqueue(Job(jobGoal: .changeTile(.Wall), targetPosition: Vector(x: c, y: r)))
+                    jobs.enqueue(Job(jobGoal: .changeTile(.Wall), targetPosition: Vector(x: c, y: r), requirements: [.position]))
                 } else {
                     //setTile(position: Vector(x: c, y: r), tile: .Floor)
-                    jobs.enqueue(Job(jobGoal: .changeTile(.Floor), targetPosition: Vector(x: c, y: r)))
+                    jobs.enqueue(Job(jobGoal: .changeTile(.Floor), targetPosition: Vector(x: c, y: r), requirements: [.position]))
                 }
             }
         }

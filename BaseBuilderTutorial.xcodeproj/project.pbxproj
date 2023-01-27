@@ -24,6 +24,7 @@
 		DE74BA532965AE1E00273E5A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA522965AE1E00273E5A /* Queue.swift */; };
 		DE74BA552965B11100273E5A /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA542965B11100273E5A /* EntityTests.swift */; };
 		DE74BA572965B25F00273E5A /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA562965B25F00273E5A /* WorldTests.swift */; };
+		DE8E4BB429841B0400CEC0EF /* EntitySpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E4BB329841B0400CEC0EF /* EntitySpriteManager.swift */; };
 		DE9C275A2972B78000E5D3AB /* SpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C27592972B78000E5D3AB /* SpriteManager.swift */; };
 		DE9C275C2972B79D00E5D3AB /* TileSpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C275B2972B79D00E5D3AB /* TileSpriteManager.swift */; };
 		DEA839052965E17B0012F08D /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839042965E17B0012F08D /* Requirement.swift */; };
@@ -72,6 +73,7 @@
 		DE74BA522965AE1E00273E5A /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DE74BA542965B11100273E5A /* EntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
 		DE74BA562965B25F00273E5A /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
+		DE8E4BB329841B0400CEC0EF /* EntitySpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitySpriteManager.swift; sourceTree = "<group>"; };
 		DE9C27592972B78000E5D3AB /* SpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteManager.swift; sourceTree = "<group>"; };
 		DE9C275B2972B79D00E5D3AB /* TileSpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileSpriteManager.swift; sourceTree = "<group>"; };
 		DEA839042965E17B0012F08D /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				DE9C27592972B78000E5D3AB /* SpriteManager.swift */,
 				DE9C275B2972B79D00E5D3AB /* TileSpriteManager.swift */,
+				DE8E4BB329841B0400CEC0EF /* EntitySpriteManager.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				DE74BA512965ADCB00273E5A /* World.swift in Sources */,
 				DE74BA1C2965AAAA00273E5A /* ViewController.swift in Sources */,
 				DE74BA482965AB6600273E5A /* Entity.swift in Sources */,
+				DE8E4BB429841B0400CEC0EF /* EntitySpriteManager.swift in Sources */,
 				DE74BA4D2965AC2E00273E5A /* Stack.swift in Sources */,
 				DEA8390B2965F2450012F08D /* Item.swift in Sources */,
 				DEA8390D2965F2550012F08D /* ItemStack.swift in Sources */,
