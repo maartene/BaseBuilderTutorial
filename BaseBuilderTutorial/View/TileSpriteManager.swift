@@ -29,6 +29,10 @@ final class TileSpriteManager: SpriteManager {
         }
     }
     
+    func cleanUp(world: World) {
+        // No cleanup needed for tiles: we assume they don't get deleted.
+    }
+    
     private func setTileTexture(texture: SKTexture, position: Vector, in scene: SKScene) {
         if let node = tileSpriteMap[position] {
             node.texture = texture

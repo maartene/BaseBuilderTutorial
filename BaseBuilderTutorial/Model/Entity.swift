@@ -10,13 +10,15 @@ import Foundation
 class Entity {
     let name: String
     var position: Vector
+    let sprite: String
     
     var jobs = Stack<Job>()
     var inventory = [Item: Int]()
     
-    init(name: String, position: Vector) {
+    init(name: String, position: Vector, sprite: String? = nil) {
         self.name = name
         self.position = position
+        self.sprite = sprite ?? name
     }
     
     func update(in world: World) {
