@@ -125,7 +125,7 @@ class Entity {
         let inventoryAmount = inventory[itemStack.item, default: 0]
         
         if let availableStack = world.items[position] {
-            let itemsToTransfer = min(itemStack.amount, availableStack.amount)
+            let itemsToTransfer = min(max(itemStack.amount, itemStack.item.preferredPickupStackSize), availableStack.amount)
             remainingAmount = itemStack.amount - itemsToTransfer
             inventory[itemStack.item] = inventoryAmount + itemsToTransfer
             world.items[position]?.amount = availableStack.amount - itemsToTransfer
