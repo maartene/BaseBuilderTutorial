@@ -25,7 +25,11 @@ class GameScene: SKScene {
     // Some nodes
     var cameraNode: SKCameraNode!
     
+    let viewModel = ViewModel()
+    
     override func didMove(to view: SKView) {
+        viewModel.world = world
+        
         cameraNode = SKCameraNode()
         cameraNode.position = CGPoint.zero
         // cameraNode.setScale(cameraScale)
@@ -73,12 +77,30 @@ class GameScene: SKScene {
         }
     }
     
+    func scenePointToVector(_ scenePoint: CGPoint) -> Vector {
+        Vector(x: Int((scenePoint.x / Self.CELL_SIZE).rounded(.toNearestOrAwayFromZero)), y: Int((scenePoint.y / Self.CELL_SIZE).rounded(.toNearestOrAwayFromZero)))
+    }
+    
+    func vectorToScenePoint(_ vector: Vector) -> CGPoint {
+        CGPoint(x: CGFloat(vector.x) * Self.CELL_SIZE, y: CGFloat(vector.y) * Self.CELL_SIZE)
+    }
+    
+    private func hover() {
+        let mousePosition = NSEvent.mouseLocation - (view?.window?.frame.origin ?? .zero)
+        let scenePoint = (view?.convert(mousePosition, to: self) ?? .zero)
+        let hoverVector = scenePointToVector(scenePoint)
+        viewModel.hoverCoord = hoverVector
+        
+        viewModel.hoverTile = world.tiles[hoverVector]
+    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         let deltaTime = currentTime - lastUpdateTime
         lastUpdateTime = currentTime
         remainingUpdateDelay -= deltaTime
+        
+        hover()
         
         if remainingUpdateDelay <= 0 {
             remainingUpdateDelay = updateInterval

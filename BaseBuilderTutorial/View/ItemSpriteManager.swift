@@ -54,14 +54,14 @@ final class ItemSpriteManager: SpriteManager {
             node.size = CGSize(width: cellSize, height: cellSize)
             node.position = CGPoint(x: cellSize * CGFloat(position.x), y: cellSize * CGFloat(position.y))
             node.zPosition = zPosition
-            node.userData = ["itemPosition": position]
-            node.userData = ["item": item]
+            // node.userData = ["itemPosition": position] (this gets overwritten in the next line)
+            node.userData = ["item": item, "itemPosition": position]
             scene.addChild(node)
             itemSpriteMap[position] = node
         }
     }
     
-    // Cache tile textures
+    // Cache item textures
     private func getTextureNamed(_ textureName: String) -> SKTexture {
         if let texture = itemTextureMap[textureName] {
             return texture
