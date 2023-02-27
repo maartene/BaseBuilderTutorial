@@ -38,6 +38,17 @@ final class World {
         return nil
     }
     
+    func getItem(named itemName: String, at position: Vector) -> ItemStack? {
+        guard let itemStack = items[position] else {
+            return nil
+        }
+        
+        guard itemStack.item.name == itemName else {
+            return nil
+        }
+        
+        return ItemStack(item: itemStack.item, amount: itemStack.amount)
+    }
     
     // MARK: Demo world
     static func makeDemoWorld() -> World {
@@ -49,6 +60,9 @@ final class World {
         newWorld.makeRoomJobs(bottomLeft: Vector(x: -10, y: 6), topRight: Vector(x: -4, y: 10))
         let entity = Entity(name: "Worker", position: .zero)
         newWorld.entities = [entity]
+        
+        let woodenBlock = Item(name: "Wooden Blocks")
+        newWorld.items[.right] = ItemStack(item: woodenBlock, amount: 100)
         
         return newWorld
     }
@@ -70,7 +84,8 @@ final class World {
             for c in bottomLeft.x ... topRight.x {
                 if r == bottomLeft.y || r == topRight.y || c == bottomLeft.x || c == topRight.x {
                     //setTile(position: Vector(x: c, y: r), tile: .Wall)
-                    jobs.enqueue(Job(jobGoal: .changeTile(.Wall), targetPosition: Vector(x: c, y: r), requirements: [.position]))
+                    // TODO: cleanup hard coded item here
+                    jobs.enqueue(Job(jobGoal: .changeTile(.Wall), targetPosition: Vector(x: c, y: r), requirements: [.position, .items(itemStack: ItemStack(item: Item(name: "Wooden Blocks"), amount: 2))]))
                 } else {
                     //setTile(position: Vector(x: c, y: r), tile: .Floor)
                     jobs.enqueue(Job(jobGoal: .changeTile(.Floor), targetPosition: Vector(x: c, y: r), requirements: [.position]))

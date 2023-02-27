@@ -19,6 +19,7 @@ class GameScene: SKScene {
     
     // Sprite Managers
     let tileSpriteManager = TileSpriteManager(cellSize: CELL_SIZE, zPosition: 0)
+    let itemSpriteManager = ItemSpriteManager(cellSize: CELL_SIZE, zPosition: 0.25)
     let entitySpriteManager = EntityTileSpriteManager(cellSize: CELL_SIZE, zPosition: 0.5)
     
     // Some nodes
@@ -36,6 +37,7 @@ class GameScene: SKScene {
     func redraw() {
         tileSpriteManager.redraw(world: world, in: self)
         entitySpriteManager.redraw(world: world, in: self)
+        itemSpriteManager.redraw(world: world, in: self)
     }
     
     

@@ -32,6 +32,7 @@
 		DEA839092965F14A0012F08D /* RequirementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839082965F14A0012F08D /* RequirementTests.swift */; };
 		DEA8390B2965F2450012F08D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8390A2965F2450012F08D /* Item.swift */; };
 		DEA8390D2965F2550012F08D /* ItemStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8390C2965F2550012F08D /* ItemStack.swift */; };
+		DEAEC938298FB40A00E67D29 /* ItemSpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		DEA839082965F14A0012F08D /* RequirementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementTests.swift; sourceTree = "<group>"; };
 		DEA8390A2965F2450012F08D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DEA8390C2965F2550012F08D /* ItemStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStack.swift; sourceTree = "<group>"; };
+		DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSpriteManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				DE9C27592972B78000E5D3AB /* SpriteManager.swift */,
 				DE9C275B2972B79D00E5D3AB /* TileSpriteManager.swift */,
 				DE8E4BB329841B0400CEC0EF /* EntitySpriteManager.swift */,
+				DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE74BA512965ADCB00273E5A /* World.swift in Sources */,
+				DEAEC938298FB40A00E67D29 /* ItemSpriteManager.swift in Sources */,
 				DE74BA1C2965AAAA00273E5A /* ViewController.swift in Sources */,
 				DE74BA482965AB6600273E5A /* Entity.swift in Sources */,
 				DE8E4BB429841B0400CEC0EF /* EntitySpriteManager.swift in Sources */,
