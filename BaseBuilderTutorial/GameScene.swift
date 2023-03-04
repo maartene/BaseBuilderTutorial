@@ -50,7 +50,10 @@ class GameScene: SKScene {
         
         for node in nodes {
             if let entityID = node.userData?["entityID"] as? ObjectIdentifier {
-                viewModel.selectedEntity = world.entities.first { ObjectIdentifier($0) == entityID }
+                let selectedEntity = world.entities.first { ObjectIdentifier($0) == entityID }
+                entitySpriteManager.highlightEntity(viewModel.selectedEntity, toggle: false)
+                viewModel.selectedEntity = selectedEntity
+                entitySpriteManager.highlightEntity(selectedEntity)
             }
         }
     }

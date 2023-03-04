@@ -59,7 +59,8 @@ final class World {
         // Show changes to world
         newWorld.makeRoomJobs(bottomLeft: Vector(x: -10, y: 6), topRight: Vector(x: -4, y: 10))
         let entity = Entity(name: "Worker", position: .zero)
-        newWorld.entities = [entity]
+        let entity2 = Entity(name: "Worker 2", position: .zero, sprite: "Worker")
+        newWorld.entities = [entity, entity2]
         
         let woodenBlock = Item(name: "Wooden Blocks")
         newWorld.items[.right] = ItemStack(item: woodenBlock, amount: 100)
