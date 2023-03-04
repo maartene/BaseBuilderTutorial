@@ -13,4 +13,8 @@ class ViewModel: ObservableObject {
     
     @Published var hoverCoord: Vector?
     @Published var hoverTile: Tile?
+    @Published var hoverEntity: Entity?
+    @Published var hoverItems: ItemStack?
+    
+    @Published var selectedEntity: Entity?
 }

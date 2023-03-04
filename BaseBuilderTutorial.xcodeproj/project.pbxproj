@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE3B272329B355DC009D30A7 /* EntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3B272229B355DC009D30A7 /* EntityView.swift */; };
 		DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA132965AAAA00273E5A /* AppDelegate.swift */; };
 		DE74BA1A2965AAAA00273E5A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA192965AAAA00273E5A /* GameScene.swift */; };
 		DE74BA1C2965AAAA00273E5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA1B2965AAAA00273E5A /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE3B272229B355DC009D30A7 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
 		DE74BA102965AAAA00273E5A /* BaseBuilderTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseBuilderTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE74BA132965AAAA00273E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE74BA192965AAAA00273E5A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				DECB98AF29ACE8AF007D0FDD /* GUI.swift */,
 				DECB98B529ACEAE4007D0FDD /* ViewModel.swift */,
+				DE3B272229B355DC009D30A7 /* EntityView.swift */,
 			);
 			path = GUI;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				DEAEC938298FB40A00E67D29 /* ItemSpriteManager.swift in Sources */,
 				DE74BA1C2965AAAA00273E5A /* ViewController.swift in Sources */,
 				DE74BA482965AB6600273E5A /* Entity.swift in Sources */,
+				DE3B272329B355DC009D30A7 /* EntityView.swift in Sources */,
 				DE8E4BB429841B0400CEC0EF /* EntitySpriteManager.swift in Sources */,
 				DE74BA4D2965AC2E00273E5A /* Stack.swift in Sources */,
 				DEA8390B2965F2450012F08D /* Item.swift in Sources */,

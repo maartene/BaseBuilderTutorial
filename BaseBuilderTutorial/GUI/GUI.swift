@@ -12,6 +12,12 @@ struct GUI: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                if viewModel.selectedEntity !=  nil  {
+                    EntityView(viewModel: viewModel)
+                }
+            }
             Spacer()
             
             HStack {
@@ -21,6 +27,14 @@ struct GUI: View {
                 }
                 if let tile = viewModel.hoverTile {
                     Text("\(tile.rawValue)").padding(.horizontal)
+                        .foregroundColor(.white)
+                }
+                if let entity = viewModel.hoverEntity {
+                    Text("\(entity.name)").padding(.horizontal)
+                        .foregroundColor(.white)
+                }
+                if let itemStack = viewModel.hoverItems {
+                    Text("\(itemStack.item.name): \(itemStack.amount)").padding(.horizontal)
                         .foregroundColor(.white)
                 }
                 Spacer()
