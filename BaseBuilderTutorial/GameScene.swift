@@ -63,7 +63,7 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        
+        viewModel.finishSelection()
     }
     
     override func mouseDown(with event: NSEvent) {
