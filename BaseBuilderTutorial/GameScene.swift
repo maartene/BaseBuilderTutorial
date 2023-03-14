@@ -46,7 +46,16 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
+        let nodes = nodes(at: pos)
         
+        for node in nodes {
+            if let entityID = node.userData?["entityID"] as? ObjectIdentifier {
+                let selectedEntity = world.entities.first { ObjectIdentifier($0) == entityID }
+                entitySpriteManager.highlightEntity(viewModel.selectedEntity, toggle: false)
+                viewModel.selectedEntity = selectedEntity
+                entitySpriteManager.highlightEntity(selectedEntity)
+            }
+        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -92,6 +101,8 @@ class GameScene: SKScene {
         viewModel.hoverCoord = hoverVector
         
         viewModel.hoverTile = world.tiles[hoverVector]
+        viewModel.hoverEntity = world.entities.first { $0.position == hoverVector }
+        viewModel.hoverItems = world.items[hoverVector]
     }
     
     override func update(_ currentTime: TimeInterval) {

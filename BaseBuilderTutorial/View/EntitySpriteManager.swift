@@ -45,6 +45,25 @@ final class EntityTileSpriteManager: SpriteManager {
         }
     }
     
+    func highlightEntity(_ entity: Entity?, toggle: Bool = true) {
+        guard let entity else {
+            return
+        }
+        
+        guard let node = entitySpriteMap[ObjectIdentifier(entity)] else {
+            return
+        }
+        
+        if let highlighter = node.childNode(withName: "highlighter") {
+            highlighter.isHidden = !toggle
+        } else {
+            let highlighter = SKShapeNode(circleOfRadius: cellSize / 2.0)
+            highlighter.name = "highlighter"
+            node.addChild(highlighter)
+            highlighter.isHidden = !toggle
+        }
+    }
+    
     private func setEntityTexture(_ entity: Entity, in scene: SKScene) {
         let texture = getTextureNamed(entity.sprite)
         let entityID = ObjectIdentifier(entity)
