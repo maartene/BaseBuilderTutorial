@@ -34,6 +34,8 @@
 		DEA8390B2965F2450012F08D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8390A2965F2450012F08D /* Item.swift */; };
 		DEA8390D2965F2550012F08D /* ItemStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8390C2965F2550012F08D /* ItemStack.swift */; };
 		DEAEC938298FB40A00E67D29 /* ItemSpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */; };
+		DEC3B17D29C0723000710325 /* BuildMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC3B17C29C0722F00710325 /* BuildMenu.swift */; };
+		DEC3B18029C0737800710325 /* GameContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC3B17F29C0737800710325 /* GameContent.swift */; };
 		DECB98B029ACE8AF007D0FDD /* GUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECB98AF29ACE8AF007D0FDD /* GUI.swift */; };
 		DECB98B629ACEAE4007D0FDD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECB98B529ACEAE4007D0FDD /* ViewModel.swift */; };
 		DECB98B829ACECBF007D0FDD /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECB98B729ACECBF007D0FDD /* CGPoint+Extensions.swift */; };
@@ -88,6 +90,8 @@
 		DEA8390A2965F2450012F08D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DEA8390C2965F2550012F08D /* ItemStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStack.swift; sourceTree = "<group>"; };
 		DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSpriteManager.swift; sourceTree = "<group>"; };
+		DEC3B17C29C0722F00710325 /* BuildMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildMenu.swift; sourceTree = "<group>"; };
+		DEC3B17F29C0737800710325 /* GameContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContent.swift; sourceTree = "<group>"; };
 		DECB98AF29ACE8AF007D0FDD /* GUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI.swift; sourceTree = "<group>"; };
 		DECB98B529ACEAE4007D0FDD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DECB98B729ACECBF007D0FDD /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 		DE74BA122965AAAA00273E5A /* BaseBuilderTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				DEC3B17E29C0736A00710325 /* Data */,
 				DECB98AE29ACE832007D0FDD /* GUI */,
 				DE9C27582972B73400E5D3AB /* View */,
 				DE74BA492965AB8500273E5A /* Utils */,
@@ -212,12 +217,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DEC3B17E29C0736A00710325 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DEC3B17F29C0737800710325 /* GameContent.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		DECB98AE29ACE832007D0FDD /* GUI */ = {
 			isa = PBXGroup;
 			children = (
 				DECB98AF29ACE8AF007D0FDD /* GUI.swift */,
 				DECB98B529ACEAE4007D0FDD /* ViewModel.swift */,
 				DE3B272229B355DC009D30A7 /* EntityView.swift */,
+				DEC3B17C29C0722F00710325 /* BuildMenu.swift */,
 			);
 			path = GUI;
 			sourceTree = "<group>";
@@ -361,6 +375,7 @@
 				DE74BA4D2965AC2E00273E5A /* Stack.swift in Sources */,
 				DEA8390B2965F2450012F08D /* Item.swift in Sources */,
 				DEA8390D2965F2550012F08D /* ItemStack.swift in Sources */,
+				DEC3B17D29C0723000710325 /* BuildMenu.swift in Sources */,
 				DEA839052965E17B0012F08D /* Requirement.swift in Sources */,
 				DE74BA1A2965AAAA00273E5A /* GameScene.swift in Sources */,
 				DE9C275A2972B78000E5D3AB /* SpriteManager.swift in Sources */,
@@ -368,6 +383,7 @@
 				DE74BA532965AE1E00273E5A /* Queue.swift in Sources */,
 				DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */,
 				DE9C275C2972B79D00E5D3AB /* TileSpriteManager.swift in Sources */,
+				DEC3B18029C0737800710325 /* GameContent.swift in Sources */,
 				DE74BA4B2965AB8E00273E5A /* Vector.swift in Sources */,
 				DE74BA462965AB2F00273E5A /* Tile.swift in Sources */,
 				DE74BA4F2965AD4D00273E5A /* Job.swift in Sources */,

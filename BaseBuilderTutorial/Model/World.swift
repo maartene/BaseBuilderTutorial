@@ -38,6 +38,16 @@ final class World {
         return nil
     }
     
+    func itemCount(_ item: Item) -> Int {
+        let correctItems = items.values.filter { itemStack in
+            itemStack.item == item
+        }
+        
+        return correctItems.reduce(0) { result, itemStack in
+            result + itemStack.amount
+        }
+    }
+    
     func getItem(named itemName: String, at position: Vector) -> ItemStack? {
         guard let itemStack = items[position] else {
             return nil
@@ -57,7 +67,9 @@ final class World {
         newWorld.makeRoom(bottomLeft: Vector(x: -5, y: -3), topRight: Vector(x: 5, y: 3))
         
         // Show changes to world
-        newWorld.makeRoomJobs(bottomLeft: Vector(x: -10, y: 6), topRight: Vector(x: -4, y: 10))
+        // newWorld.makeRoomJobs(bottomLeft: Vector(x: -10, y: 6), topRight: Vector(x: -4, y: 10))
+        
+        
         let entity = Entity(name: "Worker", position: .zero)
         let entity2 = Entity(name: "Worker 2", position: .zero, sprite: "Worker")
         newWorld.entities = [entity, entity2]

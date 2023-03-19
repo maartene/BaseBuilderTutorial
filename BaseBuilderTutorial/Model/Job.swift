@@ -37,6 +37,22 @@ extension Job: CustomStringConvertible {
     }
 }
 
+extension Job.JobGoal: CustomStringConvertible {
+    var description: String {
+        switch self {
+//        case .buildImprovement(let improvement):
+//            return "Build \(improvement.name)"
+        case .changeTile(let tile):
+            return "Change tile to \(tile.rawValue)"
+        case .fetchItems(let itemStack):
+            return "Fetch \(itemStack.amount) \(itemStack.item.name)s"
+        case .moveToLocation:
+            return "Move to location"
+        }
+    }
+}
+
+
 // MARK: Convenience builder functions
 extension Job {
     static func createMoveToLocationJob(targetLocation: Vector) -> Job {
@@ -45,5 +61,11 @@ extension Job {
     
     static func createFetchItemsJob(itemsToFetch: ItemStack, targetLocation: Vector) -> Job {
         Job(jobGoal: .fetchItems(itemsToFetch), targetPosition: targetLocation, buildTime: 1, requirements: [.position])
+    }
+    
+    static func createChangeTileJob(tile: Tile, at position: Vector) -> Job {
+        var requirements = [Requirement.position]
+        requirements.append(contentsOf: tile.itemRequirements)
+        return Job(jobGoal: .changeTile(tile), targetPosition: position, buildTime: tile.buildTime, requirements: requirements)
     }
 }
