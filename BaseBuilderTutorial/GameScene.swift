@@ -82,7 +82,7 @@ class GameScene: SKScene {
         switch event.keyCode {
         
         default:
-            print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
+            logger.debug("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
         }
     }
     

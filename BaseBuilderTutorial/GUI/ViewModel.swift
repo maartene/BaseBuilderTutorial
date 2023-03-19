@@ -44,7 +44,7 @@ class ViewModel: ObservableObject {
     
     func finishSelection() {
         guard let currentJobGoal else {
-            print("No current job goal, can't create job.")
+            logger.debug("No current job goal, can't create job.")
             return
         }
         
@@ -55,7 +55,7 @@ class ViewModel: ObservableObject {
                 world?.jobs.enqueue(job)
             }
         default:
-            print("Not supported jobgoal \(currentJobGoal).")
+            logger.warning("Not supported jobgoal \(currentJobGoal).")
         }
     }
 }

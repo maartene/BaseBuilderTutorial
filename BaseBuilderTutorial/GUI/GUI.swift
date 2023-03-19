@@ -38,7 +38,7 @@ struct GUI: View {
             
             HStack {
                 Button(action: {
-                    print("BuildMenu clicked")
+                    logger.debug("BuildMenu clicked")
                     subMenuState = .build
                 }, label: {
                     Text("Build")

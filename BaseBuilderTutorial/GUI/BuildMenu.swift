@@ -15,7 +15,7 @@ struct BuildMenu: View {
         ScrollView() {
             ForEach(viewModel.buildJobGoals, id: \.jobGoal.description) { jobGoalAvailable in
                 Button(action: {
-                    print("\(jobGoalAvailable.jobGoal) clicked")
+                    logger.debug("\(jobGoalAvailable.jobGoal) clicked")
                     viewModel.currentJobGoal = jobGoalAvailable.jobGoal
                     subMenuState = .none
                 }, label: {
