@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+enum SelectionModus {
+    case selectSingle
+    case selectSquare
+}
+
 class ViewModel: ObservableObject {
     weak var world: World?
     
@@ -17,6 +22,9 @@ class ViewModel: ObservableObject {
     @Published var hoverItems: ItemStack?
     
     @Published var selectedEntity: Entity?
+    
+    var selectionModus = SelectionModus.selectSingle
+    var selectedTiles = Set<Vector>()
     
     var buildJobGoals: [(jobGoal: Job.JobGoal, available: Bool)] {
         [
@@ -50,12 +58,28 @@ class ViewModel: ObservableObject {
         
         switch currentJobGoal {
         case .changeTile(let tile):
-            if let hoverCoord {
-                let job = Job.createChangeTileJob(tile: tile, at: hoverCoord)
+            createChangeTileJobs(tile: tile)
+        default:
+            logger.warning("Not supported jobgoal \(currentJobGoal).")
+        }
+        
+        self.currentJobGoal = nil
+        selectedTiles.removeAll()
+        self.selectionModus = .selectSingle
+    }
+    
+    private func createChangeTileJobs(tile: Tile) {
+        switch selectionModus {
+        case .selectSquare:
+            let selectedTilesArray = Array(selectedTiles)
+            let sortedSelectedTiles = selectedTilesArray.sorted(by: { v1, v2 in v1.sqrMagnitude > v2.sqrMagnitude })
+            
+            for position in sortedSelectedTiles {
+                let job = Job.createChangeTileJob(tile: tile, at: position)
                 world?.jobs.enqueue(job)
             }
         default:
-            logger.warning("Not supported jobgoal \(currentJobGoal).")
+            logger.info("No current seleciton.")
         }
     }
 }
