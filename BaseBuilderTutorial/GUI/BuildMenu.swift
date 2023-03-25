@@ -17,6 +17,7 @@ struct BuildMenu: View {
                 Button(action: {
                     logger.debug("\(jobGoalAvailable.jobGoal) clicked")
                     viewModel.currentJobGoal = jobGoalAvailable.jobGoal
+                    viewModel.selectionModus = .selectSquare
                     subMenuState = .none
                 }, label: {
                     Text(jobGoalAvailable.jobGoal.description)

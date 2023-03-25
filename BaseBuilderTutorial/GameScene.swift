@@ -17,6 +17,10 @@ class GameScene: SKScene {
     let updateInterval: TimeInterval = 0.25
     var remainingUpdateDelay: TimeInterval = 0.0
     
+    // Drag & Drop
+    var startDrag = Vector.zero
+    var selectedTiles = Set<Vector>()
+    
     // Sprite Managers
     let tileSpriteManager = TileSpriteManager(cellSize: CELL_SIZE, zPosition: 0)
     let itemSpriteManager = ItemSpriteManager(cellSize: CELL_SIZE, zPosition: 0.25)
@@ -27,6 +31,8 @@ class GameScene: SKScene {
     
     let viewModel = ViewModel()
     
+    var boxSelectSquare = SKShapeNode(rect: .zero)
+    
     override func didMove(to view: SKView) {
         viewModel.world = world
         
@@ -34,6 +40,11 @@ class GameScene: SKScene {
         cameraNode.position = CGPoint.zero
         // cameraNode.setScale(cameraScale)
         camera = cameraNode
+              
+        boxSelectSquare.zPosition = 10
+        boxSelectSquare.strokeColor = .green
+        boxSelectSquare.fillColor = SKColor(white: 1, alpha: 0)
+        addChild(boxSelectSquare)
         
         redraw()
     }
@@ -48,22 +59,55 @@ class GameScene: SKScene {
     func touchDown(atPoint pos : CGPoint) {
         let nodes = nodes(at: pos)
         
-        for node in nodes {
-            if let entityID = node.userData?["entityID"] as? ObjectIdentifier {
-                let selectedEntity = world.entities.first { ObjectIdentifier($0) == entityID }
-                entitySpriteManager.highlightEntity(viewModel.selectedEntity, toggle: false)
-                viewModel.selectedEntity = selectedEntity
-                entitySpriteManager.highlightEntity(selectedEntity)
+        switch viewModel.selectionModus {
+        case .selectSingle:
+            for node in nodes {
+                if let entityID = node.userData?["entityID"] as? ObjectIdentifier {
+                    let selectedEntity = world.entities.first { ObjectIdentifier($0) == entityID }
+                    entitySpriteManager.highlightEntity(viewModel.selectedEntity, toggle: false)
+                    viewModel.selectedEntity = selectedEntity
+                    entitySpriteManager.highlightEntity(selectedEntity)
+                }
             }
+            viewModel.selectedTiles = Set<Vector>([scenePointToVector(pos)])
+        case .selectSquare:
+            boxSelectSquare.isHidden = false
+            startDrag = scenePointToVector(pos)
         }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        
+        switch viewModel.selectionModus {
+        case .selectSquare:
+            let dragCoord = scenePointToVector(pos)
+            let bottomLeft = Vector(x: dragCoord.x < startDrag.x ? dragCoord.x : startDrag.x, y: dragCoord.y < startDrag.y ? dragCoord.y : startDrag.y)
+            let topRight = Vector(x: dragCoord.x > startDrag.x ? dragCoord.x : startDrag.x, y: dragCoord.y > startDrag.y ? dragCoord.y : startDrag.y)
+            
+            for r in bottomLeft.y ... topRight.y {
+                for c in bottomLeft.x ... topRight.x {
+                    selectedTiles.insert(Vector(x: c, y: r))
+                }
+            }
+            
+            let bottomLeftPoint = vectorToScenePoint(bottomLeft)
+            let topRightPoint = vectorToScenePoint(topRight)
+            
+            let width = max(CGFloat(topRightPoint.x - bottomLeftPoint.x), 1)
+            let height = max(CGFloat(topRightPoint.y - bottomLeftPoint.y), 1)
+            
+            let path = CGPath(rect: CGRect(x: bottomLeftPoint.x, y: bottomLeftPoint.y, width: width, height: height), transform: nil)
+            
+            boxSelectSquare.path = path
+            viewModel.selectedTiles = selectedTiles
+        default:
+            break
+        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
         viewModel.finishSelection()
+        boxSelectSquare.isHidden = true
+        selectedTiles.removeAll()
     }
     
     override func mouseDown(with event: NSEvent) {

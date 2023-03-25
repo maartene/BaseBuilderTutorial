@@ -42,6 +42,14 @@ struct Vector {
     static func -(lhs: Vector, rhs: Vector) -> Vector {
         Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
     }
+    
+    static func sqrMagnitude(_ v: Vector) -> Double {
+        Double(v.x * v.x + v.y * v.y)
+    }
+    
+    var sqrMagnitude: Double {
+        Self.sqrMagnitude(self)
+    }
 }
 
 extension Vector: Hashable { } 
