@@ -17,9 +17,10 @@ class GameScene: SKScene {
     let updateInterval: TimeInterval = 0.25
     var remainingUpdateDelay: TimeInterval = 0.0
     
-    // Drag & Drop
+    // Box selection support
     var startDrag = Vector.zero
     var selectedTiles = Set<Vector>()
+    var boxSelectSquare = SKShapeNode(rect: .zero)
     
     // Sprite Managers
     let tileSpriteManager = TileSpriteManager(cellSize: CELL_SIZE, zPosition: 0)
@@ -31,8 +32,6 @@ class GameScene: SKScene {
     
     let viewModel = ViewModel()
     
-    var boxSelectSquare = SKShapeNode(rect: .zero)
-    
     override func didMove(to view: SKView) {
         viewModel.world = world
         
@@ -41,6 +40,7 @@ class GameScene: SKScene {
         // cameraNode.setScale(cameraScale)
         camera = cameraNode
               
+        // box selection support
         boxSelectSquare.zPosition = 10
         boxSelectSquare.strokeColor = .green
         boxSelectSquare.fillColor = SKColor(white: 1, alpha: 0)
@@ -80,9 +80,12 @@ class GameScene: SKScene {
         switch viewModel.selectionModus {
         case .selectSquare:
             let dragCoord = scenePointToVector(pos)
-            let bottomLeft = Vector(x: dragCoord.x < startDrag.x ? dragCoord.x : startDrag.x, y: dragCoord.y < startDrag.y ? dragCoord.y : startDrag.y)
-            let topRight = Vector(x: dragCoord.x > startDrag.x ? dragCoord.x : startDrag.x, y: dragCoord.y > startDrag.y ? dragCoord.y : startDrag.y)
+            let bottomLeft = Vector(x: dragCoord.x < startDrag.x ? dragCoord.x : startDrag.x, 
+                                    y: dragCoord.y < startDrag.y ? dragCoord.y : startDrag.y)
+            let topRight = Vector(x: dragCoord.x > startDrag.x ? dragCoord.x : startDrag.x, 
+                                    y: dragCoord.y > startDrag.y ? dragCoord.y : startDrag.y)
             
+            selectedTiles.removeAll()
             for r in bottomLeft.y ... topRight.y {
                 for c in bottomLeft.x ... topRight.x {
                     selectedTiles.insert(Vector(x: c, y: r))
