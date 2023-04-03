@@ -66,7 +66,7 @@ final class TileSpriteManager: SpriteManager {
                 
                 setTileTexture(texture: texture, position: coord, in: scene, color: .white)
             } else {
-                // this is a void tile - we need to remova any temporary tile
+                // this is a void tile - we need to remove any temporary tile
                 if let tile = tileSpriteMap[coord] {
                     tile.removeFromParent()
                     tileSpriteMap.removeValue(forKey: coord)
