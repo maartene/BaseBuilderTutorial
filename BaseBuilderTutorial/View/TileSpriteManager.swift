@@ -27,21 +27,65 @@ final class TileSpriteManager: SpriteManager {
             
             setTileTexture(texture: texture, position: tile.key, in: scene)
         }
+        
+        for job in world.jobs {
+            switch job.jobGoal {
+            case .changeTile(let tile):
+                let texture = getTextureNamed(tile.rawValue)
+                setTileTexture(texture: texture, position: job.targetPosition, in: scene, color: SKColor(calibratedWhite: 1, alpha: 0.5))
+            default:
+                break
+            }
+        }
     }
     
     func cleanUp(world: World) {
         // No cleanup needed for tiles: we assume they don't get deleted.
     }
     
-    private func setTileTexture(texture: SKTexture, position: Vector, in scene: SKScene) {
+    func highlightTiles(tiles: [Vector], world: World, in scene: SKScene) {
+        for coord in tiles {
+            if world.tiles[coord] != nil {
+                let spriteName = getSpriteNameForTile(in: world, at: coord)
+                let texture = getTextureNamed(spriteName)
+                
+                setTileTexture(texture: texture, position: coord, in: scene, color: SKColor(calibratedRed: 0, green: 200, blue: 0, alpha: 0.5))
+            } else {
+                // this is a void tile - we create a temporary tile
+                let texture = getTextureNamed("Clear")
+                setTileTexture(texture: texture, position: coord, in: scene)
+            }
+        }
+    }
+    
+    func unhighlightTiles(tiles: [Vector], world: World, in scene: SKScene) {
+        for coord in tiles {
+            if world.tiles[coord] != nil {
+                let spriteName = getSpriteNameForTile(in: world, at: coord)
+                let texture = getTextureNamed(spriteName)
+                
+                setTileTexture(texture: texture, position: coord, in: scene, color: .white)
+            } else {
+                // this is a void tile - we need to remove any temporary tile
+                if let tile = tileSpriteMap[coord] {
+                    tile.removeFromParent()
+                    tileSpriteMap.removeValue(forKey: coord)
+                }
+            }
+        }
+    }
+    
+    private func setTileTexture(texture: SKTexture, position: Vector, in scene: SKScene, color: SKColor = .white) {
         if let node = tileSpriteMap[position] {
             node.texture = texture
+            node.color = color
         } else {
             let node = SKSpriteNode(texture: texture)
             node.size = CGSize(width: cellSize, height: cellSize)
             node.position = CGPoint(x: cellSize * CGFloat(position.x), y: cellSize * CGFloat(position.y))
             node.zPosition = zPosition
-            //node.colorBlendFactor = 1.0
+            node.colorBlendFactor = 1.0
+            node.color = color
             node.userData = ["tilePosition": position]
             scene.addChild(node)
             tileSpriteMap[position] = node

@@ -79,6 +79,7 @@ class GameScene: SKScene {
     func touchMoved(toPoint pos : CGPoint) {
         switch viewModel.selectionModus {
         case .selectSquare:
+            tileSpriteManager.unhighlightTiles(tiles: Array(selectedTiles), world: world, in: self)
             let dragCoord = scenePointToVector(pos)
             let bottomLeft = Vector(x: dragCoord.x < startDrag.x ? dragCoord.x : startDrag.x, 
                                     y: dragCoord.y < startDrag.y ? dragCoord.y : startDrag.y)
@@ -109,6 +110,7 @@ class GameScene: SKScene {
     
     func touchUp(atPoint pos : CGPoint) {
         viewModel.finishSelection()
+        tileSpriteManager.unhighlightTiles(tiles: Array(selectedTiles), world: world, in: self)
         boxSelectSquare.isHidden = true
         selectedTiles.removeAll()
     }
@@ -166,5 +168,7 @@ class GameScene: SKScene {
             
             redraw()
         }
+        
+        tileSpriteManager.highlightTiles(tiles: Array(selectedTiles), world: world, in: self)
     }
 }
