@@ -67,6 +67,7 @@ final class ItemSpriteManager: SpriteManager {
             return texture
         } else {
             let texture = SKTexture(imageNamed: textureName)
+            texture.filteringMode = .nearest
             itemTextureMap[textureName] = texture
             return texture
         }

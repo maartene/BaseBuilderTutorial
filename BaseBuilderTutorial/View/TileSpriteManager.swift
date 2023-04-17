@@ -98,6 +98,7 @@ final class TileSpriteManager: SpriteManager {
             return texture
         } else {
             let texture = SKTexture(imageNamed: textureName)
+            texture.filteringMode = .nearest
             tileTextureMap[textureName] = texture
             return texture
         }
