@@ -9,6 +9,8 @@ import SpriteKit
 
 class GameScene: SKScene {
     static let CELL_SIZE: CGFloat = 16
+    static let MIN_ZOOM: CGFloat = 0.5
+    static let MAX_ZOOM: CGFloat = 8
     
     let world = World.makeDemoWorld()
     
@@ -22,13 +24,18 @@ class GameScene: SKScene {
     var selectedTiles = Set<Vector>()
     var boxSelectSquare = SKShapeNode(rect: .zero)
     
+    // Pan support
+    var dragPositionStart: CGPoint?
+    var dragPositionTarget: CGPoint?
+    
     // Sprite Managers
     let tileSpriteManager = TileSpriteManager(cellSize: CELL_SIZE, zPosition: 0)
     let itemSpriteManager = ItemSpriteManager(cellSize: CELL_SIZE, zPosition: 0.25)
     let entitySpriteManager = EntityTileSpriteManager(cellSize: CELL_SIZE, zPosition: 0.5)
     
-    // Some nodes
+    // Camera rig
     var cameraNode: SKCameraNode!
+    var cameraScale: CGFloat = 1.0
     
     let viewModel = ViewModel()
     
@@ -37,7 +44,7 @@ class GameScene: SKScene {
         
         cameraNode = SKCameraNode()
         cameraNode.position = CGPoint.zero
-        // cameraNode.setScale(cameraScale)
+        cameraNode.setScale(cameraScale)
         camera = cameraNode
               
         // box selection support
@@ -156,6 +163,16 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        // First, move the camera to the correct position
+        if let dragStart = dragPositionStart, let dragTarget = dragPositionTarget {
+            let movement = dragStart - dragTarget
+            
+            cameraNode.position = cameraNode.position + movement
+        }
+        
+        // and set zoom level
+        cameraNode.setScale(cameraScale)
+        
         let deltaTime = currentTime - lastUpdateTime
         lastUpdateTime = currentTime
         remainingUpdateDelay -= deltaTime
@@ -170,5 +187,16 @@ class GameScene: SKScene {
         }
         
         tileSpriteManager.highlightTiles(tiles: Array(selectedTiles), world: world, in: self)
+    }
+    
+    func setZoom(delta zoomDelta: CGFloat) {
+        var newZoom = cameraNode.xScale + zoomDelta
+        if newZoom < Self.MIN_ZOOM {
+            newZoom = Self.MIN_ZOOM
+        } else if newZoom > Self.MAX_ZOOM {
+            newZoom = Self.MAX_ZOOM
+        }
+        
+        cameraScale = newZoom
     }
 }

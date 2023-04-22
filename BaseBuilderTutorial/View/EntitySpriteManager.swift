@@ -88,6 +88,7 @@ final class EntityTileSpriteManager: SpriteManager {
             return texture
         } else {
             let texture = SKTexture(imageNamed: textureName)
+            texture.filteringMode = .nearest
             entityTextureMap[textureName] = texture
             return texture
         }

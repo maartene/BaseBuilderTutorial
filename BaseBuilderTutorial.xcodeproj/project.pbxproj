@@ -90,6 +90,7 @@
 		DEA8390A2965F2450012F08D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DEA8390C2965F2550012F08D /* ItemStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStack.swift; sourceTree = "<group>"; };
 		DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSpriteManager.swift; sourceTree = "<group>"; };
+		DEB1427E29ED2C2C00B199B5 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		DEC3B17C29C0722F00710325 /* BuildMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildMenu.swift; sourceTree = "<group>"; };
 		DEC3B17F29C0737800710325 /* GameContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContent.swift; sourceTree = "<group>"; };
 		DECB98AF29ACE8AF007D0FDD /* GUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 				DE74BA2A2965AAAD00273E5A /* BaseBuilderTutorialTests */,
 				DE74BA342965AAAD00273E5A /* BaseBuilderTutorialUITests */,
 				DE74BA112965AAAA00273E5A /* Products */,
+				DEB1427D29ED2C2C00B199B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -215,6 +217,14 @@
 				DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DEB1427D29ED2C2C00B199B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DEB1427E29ED2C2C00B199B5 /* SpriteKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DEC3B17E29C0736A00710325 /* Data */ = {
