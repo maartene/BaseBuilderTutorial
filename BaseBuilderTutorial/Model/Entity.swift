@@ -77,6 +77,14 @@ class Entity {
                     }
                     return false
                 }
+            case .noObject:
+                if world.objectExistsAt(job.targetPosition) {
+                    return false
+                }
+            case .tile(let allowedTiles):
+                if allowedTiles.contains(world.tiles[position, default: .void]) == false {
+                    return false
+                }
             }
         }
         
@@ -107,6 +115,9 @@ class Entity {
             // here we 'pop' first, because fetch might create a substitute job for remaining items.
             _ = jobs.pop()
             fetch(itemStack, in: world)
+        case .installObject(let object):
+            world.objects[currentJob.targetPosition] = object
+            _ = jobs.pop()
         }
         logger.info("Entity \(self.name) finished job \(currentJob)")
     }

@@ -24,6 +24,7 @@ struct Job {
         case changeTile(Tile)
         case moveToLocation
         case fetchItems(ItemStack)
+        case installObject(object: Object)
     }
 }
 
@@ -48,6 +49,8 @@ extension Job.JobGoal: CustomStringConvertible {
             return "Fetch \(itemStack.amount) \(itemStack.item.name)s"
         case .moveToLocation:
             return "Move to location"
+        case .installObject(let object):
+            return "Install \(object.name)"
         }
     }
 }
@@ -67,5 +70,13 @@ extension Job {
         var requirements = [Requirement.position]
         requirements.append(contentsOf: tile.itemRequirements)
         return Job(jobGoal: .changeTile(tile), targetPosition: position, buildTime: tile.buildTime, requirements: requirements)
+    }
+    
+    static func createInstallObjectJob(object: Object, at position: Vector) -> Job {
+        return Job(jobGoal: .installObject(object: object), targetPosition: position, buildTime: object.installTime, requirements: [
+                .noObject,
+                .items(itemStack: ItemStack(item: object.objectItem, amount: 1)),
+                .position,
+                .tile(allowedTiles: object.allowedTiles)])
     }
 }

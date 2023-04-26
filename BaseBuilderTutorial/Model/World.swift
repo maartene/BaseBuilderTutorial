@@ -16,6 +16,8 @@ final class World {
     
     var items = [Vector: ItemStack]()
     
+    var objects = [Vector: Object]()
+    
     func update() {
         for entity in entities {
             entity.update(in: self)
@@ -58,6 +60,20 @@ final class World {
         }
         
         return ItemStack(item: itemStack.item, amount: itemStack.amount)
+    }
+    
+    func objectExistsAt(_ position: Vector) -> Bool {
+        objectAt(position) != nil
+    }
+    
+    func objectAt(_ position: Vector) -> Object? {
+        for (objectPosition, object) in objects {
+            if (objectPosition.x ..< objectPosition.x + object.size.x).contains(position.y) &&
+                (objectPosition.y ..< objectPosition.y + object.size.y).contains(position.y) {
+                return object
+            }
+        }
+        return nil
     }
     
     // MARK: Demo world
