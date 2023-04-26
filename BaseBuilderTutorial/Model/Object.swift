@@ -25,16 +25,4 @@ struct Object {
     var objectItem: Item {
         Item(name: name, sprite: sprite + "_item", preferredPickupStackSize: 1)
     }
-    
-    func canBuildInWorld(_ world: World, at position: Vector) -> Bool {
-//        guard world.objectExistsAt(position) == false else {
-//            return false
-//        }
-//        
-//        guard allowedTiles.contains(world.tiles[position, default: .void]) else {
-//            return false
-//        }
-        
-        return true
-    }
 }
