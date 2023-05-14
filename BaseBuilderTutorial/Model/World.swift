@@ -62,13 +62,14 @@ final class World {
         return ItemStack(item: itemStack.item, amount: itemStack.amount)
     }
     
+    // MARK: Object management
     func objectExistsAt(_ position: Vector) -> Bool {
         objectAt(position) != nil
     }
     
     func objectAt(_ position: Vector) -> Object? {
         for (objectPosition, object) in objects {
-            if (objectPosition.x ..< objectPosition.x + object.size.x).contains(position.y) &&
+            if (objectPosition.x ..< objectPosition.x + object.size.x).contains(position.x) &&
                 (objectPosition.y ..< objectPosition.y + object.size.y).contains(position.y) {
                 return object
             }

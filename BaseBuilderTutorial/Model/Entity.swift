@@ -77,9 +77,13 @@ class Entity {
                     }
                     return false
                 }
-            case .noObject:
-                if world.objectExistsAt(job.targetPosition) {
-                    return false
+            case .noObject(let size):
+                for x in job.targetPosition.x ..< job.targetPosition.x + size.x {
+                    for y in job.targetPosition.y ..< job.targetPosition.y + size.y {
+                        if world.objectExistsAt(Vector(x: x, y: y)) {
+                            return false
+                        }
+                    }
                 }
             case .tile(let allowedTiles):
                 if allowedTiles.contains(world.tiles[position, default: .void]) == false {
