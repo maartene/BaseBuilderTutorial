@@ -69,7 +69,7 @@ final class JobTests: XCTestCase {
     
     func test_installObject_inNonEmptyTile_fails() {
         let world = World()
-        let object = Object(name: "Some object", size: .one)
+        let object = Object(name: "Some object", size: .one, allowedTiles: [.void])
         let entity = Entity(name: "Example Entity", position: .zero)
         let job = Job.createInstallObjectJob(object: object, at: .zero)
         
@@ -86,7 +86,7 @@ final class JobTests: XCTestCase {
     
     func test_installObject_inNonEmptyTile_forOverlappingLargerObjects_fails() {
         let world = World()
-        let object = Object(name: "Some object", size: Vector(x: 3, y: 2))
+        let object = Object(name: "Some object", size: Vector(x: 3, y: 2), allowedTiles: [.void])
         let entity = Entity(name: "Example Entity", position: .zero)
         let job = Job.createInstallObjectJob(object: object, at: .zero)
         
