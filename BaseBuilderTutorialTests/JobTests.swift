@@ -84,6 +84,24 @@ final class JobTests: XCTestCase {
         XCTAssertEqual(entity.inventory[object.objectItem], 1)
     }
     
+    func test_installObject_inNonEmptyTile_forOverlappingLargerObjects_fails() {
+        let world = World()
+        let object = Object(name: "Some object", size: Vector(x: 3, y: 2))
+        let entity = Entity(name: "Example Entity", position: .zero)
+        let job = Job.createInstallObjectJob(object: object, at: .zero)
+        
+        world.objects[Vector(x: 2, y: 1)] = Object(name: "Preexisting object", size: Vector(x: 3, y: 2))
+        
+        entity.jobs.push(job)
+        entity.inventory[object.objectItem] = 1
+        
+        entity.update(in: world)
+        
+        XCTAssertFalse(world.objectExistsAt(.zero))
+        XCTAssertEqual(world.objects[Vector(x: 2, y: 1)]?.name ?? "", "Preexisting object")
+        XCTAssertEqual(entity.inventory[object.objectItem], 1)
+    }
+    
     func test_installObject_onWrongTime_fails() {
         let world = World()
         let object = Object(name: "Some object", size: .one, allowedTiles: [.Floor])

@@ -74,7 +74,7 @@ extension Job {
     
     static func createInstallObjectJob(object: Object, at position: Vector) -> Job {
         return Job(jobGoal: .installObject(object: object), targetPosition: position, buildTime: object.installTime, requirements: [
-                .noObject,
+                .noObject(size: object.size),
                 .items(itemStack: ItemStack(item: object.objectItem, amount: 1)),
                 .position,
                 .tile(allowedTiles: object.allowedTiles)])

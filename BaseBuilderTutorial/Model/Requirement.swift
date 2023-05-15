@@ -10,6 +10,6 @@ import Foundation
 enum Requirement {
     case position
     case items(itemStack: ItemStack)
-    case noObject
+    case noObject(size: Vector)
     case tile(allowedTiles: [Tile])
 }
