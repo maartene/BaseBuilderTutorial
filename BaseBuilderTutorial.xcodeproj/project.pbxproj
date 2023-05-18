@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE019D932A1669570075AA75 /* ObjectSpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE019D922A1669570075AA75 /* ObjectSpriteManager.swift */; };
 		DE2DC5B929F93F4C0026A0C9 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2DC5B829F93F4C0026A0C9 /* Object.swift */; };
 		DE3B272329B355DC009D30A7 /* EntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3B272229B355DC009D30A7 /* EntityView.swift */; };
 		DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA132965AAAA00273E5A /* AppDelegate.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE019D922A1669570075AA75 /* ObjectSpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSpriteManager.swift; sourceTree = "<group>"; };
 		DE2DC5B829F93F4C0026A0C9 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		DE3B272229B355DC009D30A7 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
 		DE74BA102965AAAA00273E5A /* BaseBuilderTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseBuilderTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 				DE9C275B2972B79D00E5D3AB /* TileSpriteManager.swift */,
 				DE8E4BB329841B0400CEC0EF /* EntitySpriteManager.swift */,
 				DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */,
+				DE019D922A1669570075AA75 /* ObjectSpriteManager.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				DECB98B629ACEAE4007D0FDD /* ViewModel.swift in Sources */,
 				DE74BA532965AE1E00273E5A /* Queue.swift in Sources */,
 				DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */,
+				DE019D932A1669570075AA75 /* ObjectSpriteManager.swift in Sources */,
 				DE9C275C2972B79D00E5D3AB /* TileSpriteManager.swift in Sources */,
 				DEC3B18029C0737800710325 /* GameContent.swift in Sources */,
 				DE74BA4B2965AB8E00273E5A /* Vector.swift in Sources */,

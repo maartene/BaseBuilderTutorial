@@ -24,6 +24,16 @@ final class World {
         }
     }
     
+    var allJobs: [Job] {
+        var result = Array(jobs)
+        
+        for entity in entities {
+            result.append(contentsOf: entity.jobs)
+        }
+        
+        return result
+    }
+    
     func setTile(position: Vector, tile: Tile) {
         tiles[position] = tile
     }
@@ -93,6 +103,12 @@ final class World {
         
         let woodenBlock = Item(name: "Wooden Blocks")
         newWorld.items[.right] = ItemStack(item: woodenBlock, amount: 100)
+        
+        let object = Object(name: "Kitchen Counter", size: Vector(x: 3, y: 1))
+        newWorld.objects[Vector(x: -4, y: -2)] = object
+        
+        let job = Job.createInstallObjectJob(object: object, at: Vector(x: 1, y: 1))
+        newWorld.jobs.enqueue(job)
         
         return newWorld
     }

@@ -21,10 +21,19 @@ class ViewModel: ObservableObject {
     @Published var hoverEntity: Entity?
     @Published var hoverItems: ItemStack?
     
+    
     @Published var selectedEntity: Entity?
     
     var selectionModus = SelectionModus.selectSingle
     var selectedTiles = Set<Vector>()
+    
+    var hoverObject: Object? {
+        if let hoverCoord {
+            return world?.objectAt(hoverCoord)
+        } else {
+            return nil
+        }
+    }
     
     var buildJobGoals: [(jobGoal: Job.JobGoal, available: Bool)] {
         [
