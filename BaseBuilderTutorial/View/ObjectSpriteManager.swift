@@ -55,12 +55,13 @@ final class ObjectSpriteManager: SpriteManager {
     }
     
     private func setObjectTexture(texture: SKTexture, object: Object, position: Vector, in scene: SKScene, color: SKColor? = nil) {
+        let xOffset = -0.5 + CGFloat(object.size.x) / 2.0
+        let yOffset = -0.5 + CGFloat(object.size.y) / 2.0
+        
+        let offset = CGPoint(x: xOffset, y: yOffset)
+        
         if let node = objectSpriteMap[position] {
             node.texture = texture
-            let xOffset = -0.5 + CGFloat(object.size.x) / 2.0
-            let yOffset = 0.0
-            
-            let offset = CGPoint(x: xOffset, y: yOffset)
             
             node.position = CGPoint(x: cellSize * CGFloat(position.x), y: cellSize * CGFloat(position.y)) + (offset * cellSize)
             
@@ -69,11 +70,6 @@ final class ObjectSpriteManager: SpriteManager {
             let node = SKSpriteNode(texture: texture)
             
             node.size = CGSize(width: cellSize * CGFloat(object.size.x), height: cellSize * CGFloat(object.size.y))
-            
-            let xOffset = -0.5 + CGFloat(object.size.x) / 2.0
-            let yOffset = 0.0
-            
-            let offset = CGPoint(x: xOffset, y: yOffset)
             
             node.position = CGPoint(x: cellSize * CGFloat(position.x), y: cellSize * CGFloat(position.y)) + (offset * cellSize)
             node.zPosition = zPosition
