@@ -50,7 +50,7 @@ struct GUI: View {
             
             HStack {
                 if let coord = viewModel.hoverCoord {
-                    Text("(\(coord.x),\(coord.y))").padding(.h	orizontal)
+                    Text("(\(coord.x),\(coord.y))").padding(.horizontal)
                         .foregroundColor(.white)
                 }
                 if let tile = viewModel.hoverTile {

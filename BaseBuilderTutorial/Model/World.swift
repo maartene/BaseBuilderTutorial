@@ -104,11 +104,13 @@ final class World {
         let woodenBlock = Item(name: "Wooden Blocks")
         newWorld.items[.right] = ItemStack(item: woodenBlock, amount: 100)
         
-        let object = Object(name: "Kitchen Counter", size: Vector(x: 3, y: 1))
+        let object = Object(name: "Kitchen Counter", size: Vector(x: 3, y: 1), installTime: 5)
         newWorld.objects[Vector(x: -4, y: -2)] = object
         
         let job = Job.createInstallObjectJob(object: object, at: Vector(x: 1, y: 1))
         newWorld.jobs.enqueue(job)
+        
+        newWorld.items[Vector(x: -1, y: 0)] = ItemStack(item: object.objectItem, amount: 2)
         
         return newWorld
     }
