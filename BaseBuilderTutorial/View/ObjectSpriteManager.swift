@@ -37,6 +37,7 @@ final class ObjectSpriteManager: SpriteManager {
             default:
                 break
             }
+            
         }
     }
     

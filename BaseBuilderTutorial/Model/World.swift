@@ -24,6 +24,10 @@ final class World {
         }
     }
     
+    func setTile(position: Vector, tile: Tile) {
+        tiles[position] = tile
+    }
+    
     var allJobs: [Job] {
         var result = Array(jobs)
         
@@ -32,10 +36,6 @@ final class World {
         }
         
         return result
-    }
-    
-    func setTile(position: Vector, tile: Tile) {
-        tiles[position] = tile
     }
     
     // MARK: Items management
@@ -105,12 +105,12 @@ final class World {
         newWorld.items[.right] = ItemStack(item: woodenBlock, amount: 100)
         
         let object = Object(name: "Kitchen Counter", size: Vector(x: 3, y: 1), installTime: 5)
-        newWorld.objects[Vector(x: -4, y: -2)] = object
+        newWorld.objects[Vector(x: 0, y: 0)] = object
         
-        let job = Job.createInstallObjectJob(object: object, at: Vector(x: 1, y: 1))
+        let job = Job.createInstallObjectJob(object: object, at: Vector(x: -4, y: -2))
         newWorld.jobs.enqueue(job)
         
-        newWorld.items[Vector(x: -1, y: 0)] = ItemStack(item: object.objectItem, amount: 2)
+        newWorld.items[.left] = ItemStack(item: object.objectItem, amount: 2)
         
         return newWorld
     }
