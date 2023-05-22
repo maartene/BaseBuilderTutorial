@@ -28,7 +28,7 @@ final class TileSpriteManager: SpriteManager {
             setTileTexture(texture: texture, position: tile.key, in: scene)
         }
         
-        for job in world.jobs {
+        for job in world.allJobs {
             switch job.jobGoal {
             case .changeTile(let tile):
                 let texture = getTextureNamed(tile.rawValue)

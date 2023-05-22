@@ -61,6 +61,10 @@ struct GUI: View {
                     Text("\(entity.name)").padding(.horizontal)
                         .foregroundColor(.white)
                 }
+                if let object = viewModel.hoverObject {
+                    Text("\(object.name)").padding(.horizontal)
+                        .foregroundColor(.white)
+                }
                 if let itemStack = viewModel.hoverItems {
                     Text("\(itemStack.item.name): \(itemStack.amount)").padding(.horizontal)
                         .foregroundColor(.white)

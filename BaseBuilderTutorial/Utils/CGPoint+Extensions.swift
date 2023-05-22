@@ -16,6 +16,10 @@ extension CGPoint {
         return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
     }
     
+    static func *(lhs: CGPoint, scalar: Double) -> CGPoint {
+        return CGPoint(x: lhs.x * scalar, y: lhs.y * scalar)
+    }
+    
     static prefix func -(point: CGPoint) -> CGPoint {
         return CGPoint(x: -point.x, y: -point.y)
     }
