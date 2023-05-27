@@ -25,6 +25,7 @@ struct Job {
         case moveToLocation
         case fetchItems(ItemStack)
         case installObject(object: Object)
+        case craft(ItemStack)
     }
 }
 
@@ -41,8 +42,6 @@ extension Job: CustomStringConvertible {
 extension Job.JobGoal: CustomStringConvertible {
     var description: String {
         switch self {
-//        case .buildImprovement(let improvement):
-//            return "Build \(improvement.name)"
         case .changeTile(let tile):
             return "Change tile to \(tile.rawValue)"
         case .fetchItems(let itemStack):
@@ -51,6 +50,8 @@ extension Job.JobGoal: CustomStringConvertible {
             return "Move to location"
         case .installObject(let object):
             return "Install \(object.name)"
+        case .craft(let itemStack):
+            return "Craft \(itemStack.amount) \(itemStack.item.name)"
         }
     }
 }

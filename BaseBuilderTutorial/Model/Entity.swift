@@ -89,6 +89,11 @@ class Entity {
                 if allowedTiles.contains(world.tiles[position, default: .void]) == false {
                     return false
                 }
+            case .object(let objectName):
+                break
+//                if world.objects[targetPosition]?.name ?? "" != objectName {
+//                    return false
+//                }
             }
         }
         
@@ -121,6 +126,8 @@ class Entity {
             fetch(itemStack, in: world)
         case .installObject(let object):
             world.objects[currentJob.targetPosition] = object
+            _ = jobs.pop()
+        case .craft(let itemStack):
             _ = jobs.pop()
         }
         logger.info("Entity \(self.name) finished job \(currentJob)")

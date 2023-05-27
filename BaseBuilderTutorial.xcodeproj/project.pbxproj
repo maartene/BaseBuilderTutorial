@@ -35,6 +35,8 @@
 		DEA839092965F14A0012F08D /* RequirementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA839082965F14A0012F08D /* RequirementTests.swift */; };
 		DEA8390B2965F2450012F08D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8390A2965F2450012F08D /* Item.swift */; };
 		DEA8390D2965F2550012F08D /* ItemStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8390C2965F2550012F08D /* ItemStack.swift */; };
+		DEA8D4FB2A222039006923FE /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8D4FA2A222039006923FE /* Recipe.swift */; };
+		DEA8D4FD2A2220A1006923FE /* RecipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8D4FC2A2220A1006923FE /* RecipeTests.swift */; };
 		DEAEC938298FB40A00E67D29 /* ItemSpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */; };
 		DEC3B17D29C0723000710325 /* BuildMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC3B17C29C0722F00710325 /* BuildMenu.swift */; };
 		DEC3B18029C0737800710325 /* GameContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC3B17F29C0737800710325 /* GameContent.swift */; };
@@ -93,6 +95,8 @@
 		DEA839082965F14A0012F08D /* RequirementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementTests.swift; sourceTree = "<group>"; };
 		DEA8390A2965F2450012F08D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DEA8390C2965F2550012F08D /* ItemStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStack.swift; sourceTree = "<group>"; };
+		DEA8D4FA2A222039006923FE /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		DEA8D4FC2A2220A1006923FE /* RecipeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTests.swift; sourceTree = "<group>"; };
 		DEAEC937298FB40A00E67D29 /* ItemSpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSpriteManager.swift; sourceTree = "<group>"; };
 		DEB1427E29ED2C2C00B199B5 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		DEC3B17C29C0722F00710325 /* BuildMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildMenu.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				DE74BA562965B25F00273E5A /* WorldTests.swift */,
 				DEA839062965E4080012F08D /* JobTests.swift */,
 				DEA839082965F14A0012F08D /* RequirementTests.swift */,
+				DEA8D4FC2A2220A1006923FE /* RecipeTests.swift */,
 			);
 			path = BaseBuilderTutorialTests;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				DEA8390A2965F2450012F08D /* Item.swift */,
 				DEA8390C2965F2550012F08D /* ItemStack.swift */,
 				DE2DC5B829F93F4C0026A0C9 /* Object.swift */,
+				DEA8D4FA2A222039006923FE /* Recipe.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -405,6 +411,7 @@
 				DE74BA462965AB2F00273E5A /* Tile.swift in Sources */,
 				DE74BA4F2965AD4D00273E5A /* Job.swift in Sources */,
 				DECB98B829ACECBF007D0FDD /* CGPoint+Extensions.swift in Sources */,
+				DEA8D4FB2A222039006923FE /* Recipe.swift in Sources */,
 				DE2DC5B929F93F4C0026A0C9 /* Object.swift in Sources */,
 				DECB98B029ACE8AF007D0FDD /* GUI.swift in Sources */,
 			);
@@ -417,6 +424,7 @@
 				DE74BA572965B25F00273E5A /* WorldTests.swift in Sources */,
 				DE74BA552965B11100273E5A /* EntityTests.swift in Sources */,
 				DE74BA2C2965AAAD00273E5A /* BaseBuilderTutorialTests.swift in Sources */,
+				DEA8D4FD2A2220A1006923FE /* RecipeTests.swift in Sources */,
 				DEA839072965E4080012F08D /* JobTests.swift in Sources */,
 				DEA839092965F14A0012F08D /* RequirementTests.swift in Sources */,
 			);

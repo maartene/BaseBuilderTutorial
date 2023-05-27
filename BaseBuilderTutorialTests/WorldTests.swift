@@ -47,5 +47,4 @@ final class WorldTests: XCTestCase {
         XCTAssertTrue(world.allJobs.contains(where: { $0.targetPosition == Vector(x: 3, y: 2) }))
         XCTAssertTrue(world.allJobs.contains(where: { $0.targetPosition == Vector(x: 5, y: 6) }))
     }
-
 }
