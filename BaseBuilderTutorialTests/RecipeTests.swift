@@ -71,7 +71,7 @@ final class RecipeTests: XCTestCase {
         XCTAssertEqual(requiredObjectName, testObject.name)
     }
     
-    func test_creaetJobAt_hasItemsRequirement() {
+    func test_createJobAt_hasItemsRequirement() {
         let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 2)
         
         let job = recipe.createJob(at: .zero)
@@ -97,6 +97,7 @@ final class RecipeTests: XCTestCase {
         XCTAssertEqual(itemStack.amount, 4)
     }
     
+    // MARK: Tests for creating jobs in the world
     func test_createJobsInWorld_createsCraftJobs() {
         let world = World()
         
