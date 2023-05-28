@@ -90,10 +90,9 @@ class Entity {
                     return false
                 }
             case .object(let objectName):
-                break
-//                if world.objects[targetPosition]?.name ?? "" != objectName {
-//                    return false
-//                }
+                if world.objects[job.targetPosition]?.name ?? "" != objectName {
+                    return false
+                }
             }
         }
         
@@ -129,6 +128,7 @@ class Entity {
             _ = jobs.pop()
         case .craft(let itemStack):
             _ = jobs.pop()
+            craft(itemStack)            
         }
         logger.info("Entity \(self.name) finished job \(currentJob)")
     }
@@ -160,6 +160,11 @@ class Entity {
                 jobs.push(Job.createFetchItemsJob(itemsToFetch: remainingItemsFetchStack, targetLocation: fetchPosition))
             }
         }
+    }
+    
+    private func craft(_ itemStack: ItemStack) {
+        let existingAmount = inventoryFor(item: itemStack.item)
+        inventory[itemStack.item] = existingAmount + itemStack.amount
     }
     
     // MARK: Inventory management
