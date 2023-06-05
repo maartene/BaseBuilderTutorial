@@ -72,5 +72,22 @@ final class RequirementTests: XCTestCase {
             XCTFail("The top job should be the change tile job.")
         }
     }
-
+    
+    func test_job_failsWhenObjectDoesNotExist() {
+        let itemToCraft = Item(name: "Example Item")
+        let requiredObject = Object(name: "workbench")
+        
+        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 2)), targetPosition: .zero, buildTime: 1, requirements: [.object(objectName: requiredObject.name)])
+        
+        let world = World()
+        
+        let entity = Entity(name: "Example Entity", position: .zero)
+        entity.jobs.push(craftJob)
+        
+        XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 0)
+        
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 0)
+    }
 }
