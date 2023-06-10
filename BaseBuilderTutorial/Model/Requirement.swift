@@ -12,4 +12,5 @@ enum Requirement {
     case items(itemStack: ItemStack)
     case noObject(size: Vector)
     case tile(allowedTiles: [Tile])
+    case object(objectName: String)
 }

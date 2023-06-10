@@ -89,6 +89,13 @@ class Entity {
                 if allowedTiles.contains(world.tiles[position, default: .void]) == false {
                     return false
                 }
+            case .object(let objectName):
+                if world.objects[job.targetPosition]?.name ?? "" != objectName {
+                    return false
+                }
+            default:
+                logger.error("Unimplemented requirement.")
+                break
             }
         }
         
@@ -122,6 +129,12 @@ class Entity {
         case .installObject(let object):
             world.objects[currentJob.targetPosition] = object
             _ = jobs.pop()
+        case .craft(let itemStack):
+            _ = jobs.pop()
+            craft(itemStack)
+        default:
+            logger.error("Unimplemented job type \(currentJob.jobGoal). Ignoring this job.")
+            _ = jobs.pop()
         }
         logger.info("Entity \(self.name) finished job \(currentJob)")
     }
@@ -153,6 +166,11 @@ class Entity {
                 jobs.push(Job.createFetchItemsJob(itemsToFetch: remainingItemsFetchStack, targetLocation: fetchPosition))
             }
         }
+    }
+    
+    private func craft(_ itemStack: ItemStack) {
+        let existingAmount = inventoryFor(item: itemStack.item)
+        inventory[itemStack.item] = existingAmount + itemStack.amount
     }
     
     // MARK: Inventory management

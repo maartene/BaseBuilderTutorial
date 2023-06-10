@@ -51,6 +51,7 @@ final class JobTests: XCTestCase {
         XCTAssertEqual(entity.jobs.peek()?.targetPosition ?? .zero, .left)
     }
 
+    // MARK: Install object jobs
     func testInstallObjectJob() {
         let world = World()
         let object = Object(name: "Some object", size: .one, allowedTiles: [.void])
@@ -180,5 +181,61 @@ final class JobTests: XCTestCase {
         XCTAssertEqual(entity.jobs.count, 2)
     }
     
+    // MARK: Craft jobs
+    func test_craftJob_addsToInventory() {
+        let itemToCraft = Item(name: "Example Item")
+        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 2)), targetPosition: .zero, buildTime: 1, requirements: [])
+        
+        let world = World()
+        
+        let entity = Entity(name: "Example Entity", position: .zero)
+        entity.jobs.push(craftJob)
+        
+        XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 0)
+        
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 2)
+    }
+    
+    func test_craftJob_addsToExistingInventory() {
+        let itemToCraft = Item(name: "Example Item")
+        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 2)), targetPosition: .zero, buildTime: 1, requirements: [])
+        
+        let world = World()
+        
+        let entity = Entity(name: "Example Entity", position: .zero)
+        entity.inventory[itemToCraft] = 1
+        entity.jobs.push(craftJob)
+        
+        XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 1)
+        
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 3)
+    }
+    
+    func test_craftJob_withAllRequirements() {
+        let itemToCraft = Item(name: "Example Item")
+        let requiredObject = Object(name: "Required Object")
+        let requiredItem = Item(name: "Required Item")
+        
+        let itemRequirement = Requirement.items(itemStack: ItemStack(item: requiredItem, amount: 2))
+        
+        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 2)), targetPosition: .right, buildTime: 1, requirements: [.position, .object(objectName: requiredObject.name), itemRequirement])
+        
+        let world = World()
+        world.objects[.right] = requiredObject
+        
+        let entity = Entity(name: "Example Entity", position: .right)
+        entity.jobs.push(craftJob)
+        entity.inventory[requiredItem] = 10
+        
+        XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 0)
+        
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 2)
+    }
     
 }
