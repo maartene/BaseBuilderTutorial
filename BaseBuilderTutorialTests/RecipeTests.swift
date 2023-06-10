@@ -89,7 +89,7 @@ final class RecipeTests: XCTestCase {
         }
         
         guard case .items(let itemStack) = itemsRequirement else {
-            XCTFail("\(itemsRequirement) should be an object requirement.")
+            XCTFail("\(itemsRequirement) should be an items requirement.")
             return
         }
         
