@@ -111,8 +111,7 @@ final class World {
         //let entity2 = Entity(name: "Worker 2", position: .zero, sprite: "Worker")
         newWorld.entities = [entity]
         
-        let woodenBlock = Item(name: "Wooden Blocks")
-        newWorld.items[.right] = ItemStack(item: woodenBlock, amount: 100)
+        newWorld.items[.right] = ItemStack(item: .woodenBlocks, amount: 100)
         newWorld.items[.down] = ItemStack(item: .food, amount: 10)
         
         newWorld.objects[Vector(x: 0, y: 0)] = Object.kitchenCounter
