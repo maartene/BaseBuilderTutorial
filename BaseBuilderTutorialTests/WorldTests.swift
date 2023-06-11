@@ -48,4 +48,12 @@ final class WorldTests: XCTestCase {
         XCTAssertTrue(world.allJobs.contains(where: { $0.targetPosition == Vector(x: 5, y: 6) }))
     }
 
+    func test_update_creaetsJobsFromRecipes() {
+        let world = World()
+        world.objects[.zero] = .kitchenCounter
+        
+        XCTAssertEqual(world.jobs.count, 0)
+        world.update()
+        XCTAssertGreaterThan(world.jobs.count, 0)
+    }
 }

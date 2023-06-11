@@ -22,10 +22,20 @@ final class World {
         for entity in entities {
             entity.update(in: self)
         }
+        
+        createJobsForObjects()
     }
     
     func setTile(position: Vector, tile: Tile) {
         tiles[position] = tile
+    }
+    
+    private func createJobsForObjects() {
+        for recipe in Recipe.allRecipes {
+            for job in recipe.createJobs(in: self) {
+                jobs.enqueue(job)
+            }
+        }
     }
     
     var allJobs: [Job] {
@@ -98,19 +108,17 @@ final class World {
         
         
         let entity = Entity(name: "Worker", position: .zero)
-        let entity2 = Entity(name: "Worker 2", position: .zero, sprite: "Worker")
-        newWorld.entities = [entity, entity2]
+        newWorld.entities = [entity]
         
-        let woodenBlock = Item(name: "Wooden Blocks")
-        newWorld.items[.right] = ItemStack(item: woodenBlock, amount: 100)
+        newWorld.items[.right] = ItemStack(item: .woodenBlocks, amount: 100)
+        newWorld.items[.down] = ItemStack(item: .food, amount: 10)
         
-        let object = Object(name: "Kitchen Counter", size: Vector(x: 3, y: 1), installTime: 5)
-        newWorld.objects[Vector(x: 0, y: 0)] = object
+        newWorld.objects[Vector(x: 0, y: 0)] = .kitchenCounter
         
-        let job = Job.createInstallObjectJob(object: object, at: Vector(x: -4, y: -2))
+        let job = Job.createInstallObjectJob(object: .kitchenCounter, at: Vector(x: -4, y: -2))
         newWorld.jobs.enqueue(job)
         
-        newWorld.items[.left] = ItemStack(item: object.objectItem, amount: 2)
+        newWorld.items[.left] = ItemStack(item: Object.kitchenCounter.objectItem, amount: 2)
         
         return newWorld
     }

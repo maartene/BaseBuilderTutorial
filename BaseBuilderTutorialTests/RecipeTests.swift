@@ -9,36 +9,14 @@ import XCTest
 @testable import BaseBuilderTutorial
 
 final class RecipeTests: XCTestCase {
-
-//    override func setUpWithError() throws {
-//        // Put setup code here. This method is called before the invocation of each test method in the class.
-//    }
-//
-//    override func tearDownWithError() throws {
-//        // Put teardown code here. This method is called after the invocation of each test method in the class.
-//    }
-//
-//    func testExample() throws {
-//        // This is an example of a functional test case.
-//        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//        // Any test you write for XCTest can be annotated as throws and async.
-//        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-//        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-//    }
-//
-//    func testPerformanceExample() throws {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
     
     let testObject = Object(name: "Test Object")
     let inputItem = Item(name: "Required Item")
     let outputItem = Item(name: "Resulting Item")
     
+    // MARK: Test a single job
     func test_createJobAt_createsACraftJob() {
-        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2))
+        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 1)
         
         let job = recipe.createJob(at: .zero)
         
@@ -53,7 +31,7 @@ final class RecipeTests: XCTestCase {
     
     // Position requirement
     func test_createJobAt_hasPositionRequirement() {
-        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2))
+        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 1)
         
         let job = recipe.createJob(at: .right)
         
@@ -71,7 +49,7 @@ final class RecipeTests: XCTestCase {
     
     // Item requirements
     func test_createJobAt_hasItemRequirements() {
-        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2))
+        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 1)
         
         let job = recipe.createJob(at: .zero)
         
@@ -99,7 +77,7 @@ final class RecipeTests: XCTestCase {
     
     // Object exists in the world requirement
     func test_createJobAt_hasObjectRequirement() {
-        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2))
+        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 2)
         
         let job = recipe.createJob(at: .zero)
         
@@ -123,4 +101,75 @@ final class RecipeTests: XCTestCase {
         XCTAssertEqual(objectName, testObject.name)
 
     }
+    
+    // MARK: Tests for creating jobs in the world
+    func test_createJobsInWorld_createsCraftJobs() throws {
+        let world = World()
+        
+        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 2)
+        
+        world.objects[.right] = testObject
+        
+        let jobs = recipe.createJobs(in: world)
+        
+        XCTAssertEqual(jobs.count, 1)
+        
+        let job = try XCTUnwrap(jobs.first)
+        
+        switch job.jobGoal {
+        case .craft:
+            break
+        default:
+            XCTFail("Expected a craft job.")
+        }
+    }
+    
+    func test_createJobsInWorld_createsMultipleCraftJobs() throws {
+        let world = World()
+        
+        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 2)
+        
+        world.objects[.right] = testObject
+        world.objects[.left] = testObject
+        
+        let jobs = recipe.createJobs(in: world)
+        
+        XCTAssertEqual(jobs.count, 2)
+    }
+    
+    func test_createJobsInWorld_cantCreateMoreThanMaxJobs() {
+        let world = World()
+        
+        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 2)
+        
+        // Let there be three objects that can spawn jobs
+        world.objects[.right] = testObject
+        world.objects[.left] = testObject
+        world.objects[.zero] = testObject
+        
+        let jobs = recipe.createJobs(in: world)
+        
+        XCTAssertEqual(jobs.count, 2)
+    }
+    
+    func test_createJobsInWorld_cantCreateMoreThanMaxJobs_takingExistingJobsIntoAccount() {
+        let world = World()
+        
+        let recipe = Recipe(object: testObject, requiredItems: [ItemStack(item: inputItem, amount: 4)], resultingItem: ItemStack(item: outputItem, amount: 2), maxJobs: 2)
+        
+        // Let there be three objects that can spawn jobs
+        world.objects[.right] = testObject
+        world.objects[.left] = testObject
+        
+        let jobs = recipe.createJobs(in: world)
+        
+        for job in jobs {
+            world.jobs.enqueue(job)
+        }
+        
+        let extraJobs = recipe.createJobs(in: world)
+        
+        XCTAssertEqual(extraJobs.count, 0)
+    }
+    
 }
