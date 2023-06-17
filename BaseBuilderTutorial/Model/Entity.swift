@@ -94,8 +94,10 @@ class Entity {
                     return false
                 }
             case .noItemStack:
-                if world.items[job.targetPosition] != nil {
-                    return false
+                if let existingItemStack = world.items[job.targetPosition] {
+                    if existingItemStack.amount != 0 {
+                        return false
+                    }
                 }
             default:
                 logger.error("Unimplemented requirement.")

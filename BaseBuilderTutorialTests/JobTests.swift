@@ -300,4 +300,24 @@ final class JobTests: XCTestCase {
         XCTAssertEqual(world.items[.zero]?.item, preExistingItem)
         XCTAssertEqual(world.items[.zero]?.amount, 100)
     }
+
+    func test_storeJob_succeeds_atLocationWithAZeroItemStack() throws {
+        let itemToStore = Item(name: "Some Item")
+        
+        let entity = Entity(name: "Example Entity", position: .zero)
+        entity.inventory[itemToStore] = 7
+        
+        let storeJob = Job.createStoreItemJob(item: itemToStore, amount: 5, at: .zero)
+        entity.jobs.push(storeJob)
+        
+        let world = World()
+        let preExistingItem = Item(name: "Pre-existing item")
+        world.items[.zero] = ItemStack(item: preExistingItem, amount: 0)
+        
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.inventory[itemToStore, default: 0], 2)
+        XCTAssertEqual(world.items[.zero]?.item, itemToStore)
+        XCTAssertEqual(world.items[.zero]?.amount, 5)
+    }
 }
