@@ -13,4 +13,5 @@ enum Requirement {
     case noObject(size: Vector)
     case tile(allowedTiles: [Tile])
     case object(objectName: String)
+    case noItemStack
 }

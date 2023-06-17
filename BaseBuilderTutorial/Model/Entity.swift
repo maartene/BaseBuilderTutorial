@@ -93,6 +93,10 @@ class Entity {
                 if world.objects[job.targetPosition]?.name ?? "" != objectName {
                     return false
                 }
+            case .noItemStack:
+                if world.items[job.targetPosition] != nil {
+                    return false
+                }
             default:
                 logger.error("Unimplemented requirement.")
                 break
@@ -132,6 +136,9 @@ class Entity {
         case .craft(let itemStack):
             _ = jobs.pop()
             craft(itemStack)
+        case .store(let itemStack):
+            store(itemStack, in: world)
+            _ = jobs.pop()
         default:
             logger.error("Unimplemented job type \(currentJob.jobGoal). Ignoring this job.")
             _ = jobs.pop()
@@ -171,6 +178,15 @@ class Entity {
     private func craft(_ itemStack: ItemStack) {
         let existingAmount = inventoryFor(item: itemStack.item)
         inventory[itemStack.item] = existingAmount + itemStack.amount
+    }
+    
+    private func store(_ itemStack: ItemStack, in world: World) {
+        let inventoryAmount = inventoryFor(item: itemStack.item)
+        
+        assert(inventoryAmount >= itemStack.amount)
+        
+        inventory[itemStack.item] = inventoryAmount - itemStack.amount
+        world.items[position] = itemStack
     }
     
     // MARK: Inventory management

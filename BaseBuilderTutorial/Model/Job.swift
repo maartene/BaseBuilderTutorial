@@ -26,6 +26,7 @@ struct Job {
         case fetchItems(ItemStack)
         case installObject(object: Object)
         case craft(ItemStack)
+        case store(ItemStack)
     }
 }
 
@@ -54,6 +55,8 @@ extension Job.JobGoal: CustomStringConvertible {
             return "Install \(object.name)"
         case .craft(let itemStack):
             return "Craft \(itemStack.amount) \(itemStack.item.name)"
+        case .store(let itemStack):
+            return "Store \(itemStack.amount) \(itemStack.item.name)"
         }
     }
 }
@@ -81,5 +84,9 @@ extension Job {
                 .items(itemStack: ItemStack(item: object.objectItem, amount: 1)),
                 .position,
                 .tile(allowedTiles: object.allowedTiles)])
+    }
+    
+    static func createStoreItemJob(item: Item, amount: Int, at position: Vector) -> Job {
+        return Job(jobGoal: .store(ItemStack(item: item, amount: amount)), targetPosition: position, requirements: [.position, .noItemStack])
     }
 }

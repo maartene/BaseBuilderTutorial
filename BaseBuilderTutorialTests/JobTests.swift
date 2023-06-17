@@ -238,4 +238,66 @@ final class JobTests: XCTestCase {
         XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 2)
     }
     
+    // MARK: Store jobs
+    func test_storeJob() throws {
+        let itemToStore = Item(name: "Some Item")
+        
+        let entity = Entity(name: "Example Entity", position: .zero)
+        entity.inventory[itemToStore] = 7
+        
+        let storeJob = Job.createStoreItemJob(item: itemToStore, amount: 5, at: .zero)
+        entity.jobs.push(storeJob)
+        
+        let world = World()
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.inventory[itemToStore, default: 0], 2)
+        let storedItemStack = try XCTUnwrap(world.items[.zero])
+        XCTAssertEqual(storedItemStack.item, itemToStore)
+        XCTAssertEqual(storedItemStack.amount, 5)
+    }
+    
+    func test_storeJob_atWrongPosition_spawnsMoveJob() throws {
+        let itemToStore = Item(name: "Some Item")
+        
+        let entity = Entity(name: "Example Entity", position: .zero)
+        entity.inventory[itemToStore] = 7
+        
+        let storeJob = Job.createStoreItemJob(item: itemToStore, amount: 5, at: .right)
+        entity.jobs.push(storeJob)
+        
+        let world = World()
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.inventory[itemToStore, default: 0], 7)
+        
+        let topJob = try XCTUnwrap(entity.jobs.peek())
+        
+        guard case .moveToLocation = topJob.jobGoal else {
+            XCTFail("Expected a moveToLocaiton job")
+            return
+        }
+        
+        XCTAssertEqual(topJob.targetPosition, .right)
+    }
+    
+    func test_storeJob_fails_atLocationWithItemStack() throws {
+        let itemToStore = Item(name: "Some Item")
+        
+        let entity = Entity(name: "Example Entity", position: .zero)
+        entity.inventory[itemToStore] = 7
+        
+        let storeJob = Job.createStoreItemJob(item: itemToStore, amount: 5, at: .zero)
+        entity.jobs.push(storeJob)
+        
+        let world = World()
+        let preExistingItem = Item(name: "Pre-existing item")
+        world.items[.zero] = ItemStack(item: preExistingItem, amount: 100)
+        
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.inventory[itemToStore, default: 0], 7)
+        XCTAssertEqual(world.items[.zero]?.item, preExistingItem)
+        XCTAssertEqual(world.items[.zero]?.amount, 100)
+    }
 }
