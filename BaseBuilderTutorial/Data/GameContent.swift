@@ -17,7 +17,7 @@ extension Item {
     }
     
     static var cookedMeal: Item {
-        Item(name: "Cooked Meal")
+        Item(name: "Cooked Meal", preferredPickupStackSize: 5)
     }
 }
 

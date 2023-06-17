@@ -82,6 +82,44 @@ final class World {
         return ItemStack(item: itemStack.item, amount: itemStack.amount)
     }
     
+    func findEmptyTileNear(_ position: Vector, maxRadius: Int = 10) -> Vector? {
+        var radius = 0
+        while radius <= maxRadius {
+            for y in position.y - radius ... position.y + radius {
+                for x in position.x - radius ... position.x + radius {
+                    let point = Vector(x: x, y: y)
+                    if tileIsEmpty(point) {
+                        return point
+                    }
+                }
+            }
+            radius += 1
+        }
+        return nil
+    }
+    
+    private func tileIsEmpty(_ position: Vector) -> Bool {
+        if let itemStack = items[position] {
+            if itemStack.amount != 0 {
+                return false
+            }
+        }
+        
+        if tiles[position, default: .void] == .Wall {
+            return false
+        }
+        
+        if tiles[position, default: .void] == .void {
+            return false
+        }
+        
+        if objectExistsAt(position) {
+            return false
+        }
+        
+        return true
+    }
+    
     // MARK: Object management
     func objectExistsAt(_ position: Vector) -> Bool {
         objectAt(position) != nil

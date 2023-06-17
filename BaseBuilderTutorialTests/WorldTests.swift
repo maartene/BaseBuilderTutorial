@@ -56,4 +56,72 @@ final class WorldTests: XCTestCase {
         world.update()
         XCTAssertGreaterThan(world.jobs.count, 0)
     }
+    
+    // MARK: findEmptyTileNear
+    func test_findEmptyTileNear() {
+        let world = World()
+        world.setTile(position: .zero, tile: .Floor)
+        XCTAssertNotNil(world.findEmptyTileNear(.zero))
+    }
+    
+    func test_getEmptyTileNear_outsideRange_returns_nil() {
+        let world = World()
+        for x in -10 ... 10 {
+            for y in -10 ... 10 {
+                let point = Vector(x: x, y: y)
+                world.setTile(position: point, tile: .Floor)
+                world.items[point] = ItemStack(item: Item(name: "an Item"), amount: 1)
+            }
+        }
+        world.setTile(position: Vector(x: -20, y: -20), tile: .Floor)
+        
+        XCTAssertNil(world.findEmptyTileNear(.zero, maxRadius: 5))
+    }
+    
+    func test_getEmptyTileNear_withZeroItemStack() {
+        let world = World()
+        world.setTile(position: .zero, tile: .Floor)
+        world.items[.zero] = ItemStack(item: Item(name: "An item"), amount: 0)
+        XCTAssertNotNil(world.findEmptyTileNear(.zero, maxRadius: 0))
+    }
+    
+    func test_findEmptyTileNear_returnsNil_forWall() {
+        let world = World()
+        world.setTile(position: .zero, tile: .Wall)
+        let result = world.findEmptyTileNear(.zero, maxRadius: 0)
+        XCTAssertNil(result)
+    }
+    
+    func test_findEmptyTileNear_returnsNil_forVoid() {
+        let world = World()
+        XCTAssertEqual(world.tiles[.zero, default: .void], .void)
+        let result = world.findEmptyTileNear(.zero, maxRadius: 0)
+        XCTAssertNil(result)
+    }
+    
+    func test_findEmptyTileNear_returnsNil_forTileWithObject() {
+        let world = World()
+        world.setTile(position: .zero, tile: .Floor)
+        world.objects[.left] = Object(name: "Some Object", size: Vector(x: 3, y: 1))
+        let result = world.findEmptyTileNear(.zero, maxRadius: 0)
+        XCTAssertNil(result)
+    }
+    
+    func test_findEmptyTileNear_returnsPoint_ifThereIsEmptyTileInRange() throws {
+        let world = World()
+        for x in -5 ... 5 {
+            for y in -5 ... 5 {
+                let point = Vector(x: x, y: y)
+                world.setTile(position: point, tile: .Floor)
+                if abs(x) <= 3 || abs(y) <= 3 {
+                    world.items[point] = ItemStack(item: Item(name: "an Item"), amount: 1)
+                } else if abs(x) == 4 || abs(y) == 4 {
+                    world.objects[point] = Object(name: "Some Object")
+                }
+            }
+        }
+        let result = try XCTUnwrap(world.findEmptyTileNear(.zero, maxRadius: 6))
+        
+        XCTAssertTrue(abs(result.x) == 5 || abs(result.y) == 5)
+    }
 }

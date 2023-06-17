@@ -238,6 +238,31 @@ final class JobTests: XCTestCase {
         XCTAssertEqual(entity.inventory[itemToCraft, default: 0], 2)
     }
     
+    func test_craftJob_spawnsStoreJob_afterCrafting_whenMoreThanPreferredStackAmount() throws {
+        let itemToCraft = Item(name: "Example Item", preferredPickupStackSize: 10)
+        
+        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 5)), targetPosition: .zero)
+        
+        let world = World()
+        world.setTile(position: .up, tile: .Floor)
+        
+        let entity = Entity(name: "Example Entity", position: .zero)
+        entity.jobs.push(craftJob)
+        entity.inventory[itemToCraft] = 8
+        
+        entity.update(in: world)
+        
+        let topJob = try XCTUnwrap(entity.jobs.peek())
+        
+        guard case .store(let itemToStoreStack) = topJob.jobGoal else {
+            XCTFail("Expected the top job to be a store job, but found \(topJob.jobGoal)")
+            return
+        }
+        
+        XCTAssertEqual(itemToStoreStack.item, itemToCraft)
+        XCTAssertEqual(itemToStoreStack.amount, itemToCraft.preferredPickupStackSize)
+    }
+    
     // MARK: Store jobs
     func test_storeJob() throws {
         let itemToStore = Item(name: "Some Item")
