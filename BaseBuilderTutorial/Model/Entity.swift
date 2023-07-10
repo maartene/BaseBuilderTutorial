@@ -137,7 +137,7 @@ class Entity {
             _ = jobs.pop()
         case .craft(let itemStack):
             _ = jobs.pop()
-            craft(itemStack)
+            craft(itemStack, in: world)
         case .store(let itemStack):
             store(itemStack, in: world)
             _ = jobs.pop()
@@ -177,9 +177,16 @@ class Entity {
         }
     }
     
-    private func craft(_ itemStack: ItemStack) {
+    private func craft(_ itemStack: ItemStack, in world: World) {
         let existingAmount = inventoryFor(item: itemStack.item)
-        inventory[itemStack.item] = existingAmount + itemStack.amount
+        let newAmount = existingAmount + itemStack.amount
+        inventory[itemStack.item] = newAmount
+        if newAmount > itemStack.item.preferredPickupStackSize {
+            if let storePosition = world.findEmptyTileNear(position) {
+                jobs.push(Job.createStoreItemJob(item: itemStack.item, amount: itemStack.item.preferredPickupStackSize, at: storePosition))
+                logger.info("Entity \(self.name) created job \(self.jobs.peek()?.description ?? "nil")")
+            }
+        }
     }
     
     private func store(_ itemStack: ItemStack, in world: World) {
