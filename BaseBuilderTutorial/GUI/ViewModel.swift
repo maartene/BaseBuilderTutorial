@@ -42,6 +42,14 @@ class ViewModel: ObservableObject {
         ]
     }
     
+    var installObjectJobGoals: [(jobGoal: Job.JobGoal, available: Bool)] {
+        Object.allObjects.map { object in
+            let jobGoal = Job.JobGoal.installObject(object: object)
+            let available = world?.itemCount(object.objectItem) ?? 0 > 0
+            return (jobGoal, available)
+        }
+    }
+    
     var currentJobGoal: Job.JobGoal?
     
     // We want to make sure we only show jobs that we have the items for in the world.
@@ -68,6 +76,8 @@ class ViewModel: ObservableObject {
         switch currentJobGoal {
         case .changeTile(let tile):
             createChangeTileJobs(tile: tile)
+        case .installObject(let object):
+            createInstallObjectJob(object: object)
         default:
             logger.warning("Not supported jobgoal \(currentJobGoal).")
         }
@@ -89,6 +99,18 @@ class ViewModel: ObservableObject {
             }
         default:
             logger.info("No current seleciton.")
+        }
+    }
+    
+    func createInstallObjectJob(object: Object) {
+        switch selectionModus {
+        case .selectSingle:
+            if let position = selectedTiles.first, let world = world {//, object.canBuildInWorld(world, at: position) {
+                let job = Job.createInstallObjectJob(object: object, at: position)
+                world.jobs.enqueue(job)
+            }
+        default:
+            print("No current selection ")
         }
     }
 }

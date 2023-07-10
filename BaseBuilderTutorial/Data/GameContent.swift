@@ -25,6 +25,12 @@ extension Object {
     static var kitchenCounter: Object {
         Object(name: "Kitchen Counter", size: Vector(x: 3, y: 1), installTime: 5, allowedTiles: [.Floor])
     }
+    
+    static var allObjects: [Object] {
+        [
+            kitchenCounter
+        ]
+    }
 }
 
 extension Recipe {

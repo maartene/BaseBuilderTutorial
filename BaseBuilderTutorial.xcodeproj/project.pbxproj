@@ -10,6 +10,7 @@
 		DE019D932A1669570075AA75 /* ObjectSpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE019D922A1669570075AA75 /* ObjectSpriteManager.swift */; };
 		DE2DC5B929F93F4C0026A0C9 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2DC5B829F93F4C0026A0C9 /* Object.swift */; };
 		DE3B272329B355DC009D30A7 /* EntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3B272229B355DC009D30A7 /* EntityView.swift */; };
+		DE6542012A5C4CFD000DC645 /* InstallObjectMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6542002A5C4CFD000DC645 /* InstallObjectMenu.swift */; };
 		DE6588EB2A3458FC002ED1DF /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6588EA2A3458FC002ED1DF /* Recipe.swift */; };
 		DE6588ED2A345A1B002ED1DF /* RecipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6588EC2A345A1B002ED1DF /* RecipeTests.swift */; };
 		DE74BA142965AAAA00273E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE74BA132965AAAA00273E5A /* AppDelegate.swift */; };
@@ -66,6 +67,7 @@
 		DE019D922A1669570075AA75 /* ObjectSpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSpriteManager.swift; sourceTree = "<group>"; };
 		DE2DC5B829F93F4C0026A0C9 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		DE3B272229B355DC009D30A7 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
+		DE6542002A5C4CFD000DC645 /* InstallObjectMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallObjectMenu.swift; sourceTree = "<group>"; };
 		DE6588EA2A3458FC002ED1DF /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		DE6588EC2A345A1B002ED1DF /* RecipeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTests.swift; sourceTree = "<group>"; };
 		DE74BA102965AAAA00273E5A /* BaseBuilderTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseBuilderTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,6 +256,7 @@
 				DECB98B529ACEAE4007D0FDD /* ViewModel.swift */,
 				DE3B272229B355DC009D30A7 /* EntityView.swift */,
 				DEC3B17C29C0722F00710325 /* BuildMenu.swift */,
+				DE6542002A5C4CFD000DC645 /* InstallObjectMenu.swift */,
 			);
 			path = GUI;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				DEC3B17D29C0723000710325 /* BuildMenu.swift in Sources */,
 				DEA839052965E17B0012F08D /* Requirement.swift in Sources */,
 				DE74BA1A2965AAAA00273E5A /* GameScene.swift in Sources */,
+				DE6542012A5C4CFD000DC645 /* InstallObjectMenu.swift in Sources */,
 				DE9C275A2972B78000E5D3AB /* SpriteManager.swift in Sources */,
 				DECB98B629ACEAE4007D0FDD /* ViewModel.swift in Sources */,
 				DE74BA532965AE1E00273E5A /* Queue.swift in Sources */,
