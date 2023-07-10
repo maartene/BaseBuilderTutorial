@@ -99,10 +99,8 @@ final class World {
     }
     
     private func tileIsEmpty(_ position: Vector) -> Bool {
-        if let itemStack = items[position] {
-            if itemStack.amount != 0 {
-                return false
-            }
+        if let existingItemStack = items[position], existingItemStack.amount > 0 {
+            return false
         }
         
         if tiles[position, default: .void] == .Wall {
