@@ -50,6 +50,19 @@ class ViewModel: ObservableObject {
         }
     }
     
+    var jobObject: Object? {
+        switch currentJobGoal {
+        case .installObject(let object):
+            return object
+        default:
+            return nil
+        }
+    }
+    
+
+    
+    
+    
     var currentJobGoal: Job.JobGoal?
     
     // We want to make sure we only show jobs that we have the items for in the world.
@@ -105,7 +118,7 @@ class ViewModel: ObservableObject {
     func createInstallObjectJob(object: Object) {
         switch selectionModus {
         case .selectSingle:
-            if let position = selectedTiles.first, let world = world {//, object.canBuildInWorld(world, at: position) {
+            if let position = selectedTiles.first, let world = world, object.canBuildInWorld(world, at: position) {
                 let job = Job.createInstallObjectJob(object: object, at: position)
                 world.jobs.enqueue(job)
             }

@@ -124,4 +124,26 @@ final class WorldTests: XCTestCase {
         
         XCTAssertTrue(abs(result.x) == 5 || abs(result.y) == 5)
     }
+    
+    // MARK: Can Install Object in world
+    func test_object_canBuildInWorld() {
+        let testObject = Object(name: "Test Object", allowedTiles: [.void])
+        let world = World()
+        XCTAssertTrue(testObject.canBuildInWorld(world, at: .zero))
+    }
+    
+    func test_object_canBuildInWorld_failsForNonEmptyTile() {
+        let testObject = Object(name: "Test Object", allowedTiles: [.void])
+        let world = World()
+        world.objects[.down] = Object(name: "Pre-existing object", size: Vector(x: 1, y: 3))
+        XCTAssertFalse(testObject.canBuildInWorld(world, at: .zero))
+    }
+    
+    func test_object_canBuildInWorld_failsForWrongTileType() {
+        let testObject = Object(name: "Test Object", size: Vector(x: 3, y: 1), allowedTiles: [.Floor])
+        let world = World()
+        world.setTile(position: .left, tile: .Floor)
+        XCTAssertEqual(world.tiles[.zero, default: .void], .void)
+        XCTAssertFalse(testObject.canBuildInWorld(world, at: .left))
+    }
 }
