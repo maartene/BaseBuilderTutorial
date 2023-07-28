@@ -110,7 +110,7 @@ class ViewModel: ObservableObject {
                 world.jobs.enqueue(job)
             }
         default:
-            print("No current selection ")
+            logger.info("No current selection ")
         }
     }
 }

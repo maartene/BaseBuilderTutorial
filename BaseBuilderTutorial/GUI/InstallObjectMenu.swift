@@ -15,7 +15,7 @@ struct InstallObjectMenu: View {
         ScrollView() {
             ForEach(viewModel.installObjectJobGoals, id: \.jobGoal.description) { jobGoalAvailable in
                 Button(action: {
-                    print("\(jobGoalAvailable.jobGoal) clicked")
+                    logger.info("\(jobGoalAvailable.jobGoal) clicked")
                     viewModel.selectionModus = .selectSingle
                     viewModel.currentJobGoal = jobGoalAvailable.jobGoal
                     subMenuState = .none

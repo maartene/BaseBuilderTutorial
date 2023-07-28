@@ -48,7 +48,7 @@ struct GUI: View {
                     Text("Build")
                 }).disabled(subMenuState == .build)
                 Button(action: {
-                    print("ObjectsMenu clicked")
+                    logger.info("ObjectsMenu clicked")
                     subMenuState = .installObject
                 }, label: {
                     Text("Objects")
