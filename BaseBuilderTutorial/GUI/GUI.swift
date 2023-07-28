@@ -11,6 +11,7 @@ struct GUI: View {
     enum SubMenuState {
         case none
         case build
+        case installObject
     }
     
     @ObservedObject var viewModel: ViewModel
@@ -31,6 +32,9 @@ struct GUI: View {
                 if subMenuState == .build {
                     BuildMenu(viewModel: viewModel, subMenuState: $subMenuState)
                 }
+                if subMenuState == .installObject {
+                    InstallObjectMenu(viewModel: viewModel, subMenuState: $subMenuState)
+                }
                 Spacer()
             }
             .padding()
@@ -43,6 +47,12 @@ struct GUI: View {
                 }, label: {
                     Text("Build")
                 }).disabled(subMenuState == .build)
+                Button(action: {
+                    logger.info("ObjectsMenu clicked")
+                    subMenuState = .installObject
+                }, label: {
+                    Text("Objects")
+                }).disabled(subMenuState == .installObject)
                 Spacer()
             }
             .padding()
