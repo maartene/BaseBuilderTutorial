@@ -27,14 +27,11 @@ struct Object {
     }
     
     func canBuildInWorld(_ world: World, at position: Vector) -> Bool {
-        guard world.objectExistsAt(position) == false else {
-            return false
-        }
-        
         for y in position.y ..< position.y + size.y {
             for x in position.x ..< position.x + size.x {
-                let tile = world.tiles[Vector(x: x, y: y), default: .void]
-                if allowedTiles.contains(tile) == false {
+                let point = Vector(x: x, y: y)
+                let tile = world.tiles[point, default: .void]
+                if allowedTiles.contains(tile) == false || world.objectExistsAt(point) {
                     return false
                 }
             }

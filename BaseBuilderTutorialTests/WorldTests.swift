@@ -139,6 +139,14 @@ final class WorldTests: XCTestCase {
         XCTAssertFalse(testObject.canBuildInWorld(world, at: .zero))
     }
     
+    // Missing test from video series
+    func test_object_canBuildInWorld_failsForNonEmptyTile_PartialOverlap() {
+        let testObject = Object(name: "Test Object", size: Vector(x: 3, y: 1), allowedTiles: [.void])
+        let world = World()
+        world.objects[.right] = Object(name: "Pre-existing object", size: Vector(x: 3, y: 1))
+        XCTAssertFalse(testObject.canBuildInWorld(world, at: .zero))
+    }
+    
     func test_object_canBuildInWorld_failsForWrongTileType() {
         let testObject = Object(name: "Test Object", size: Vector(x: 3, y: 1), allowedTiles: [.Floor])
         let world = World()
