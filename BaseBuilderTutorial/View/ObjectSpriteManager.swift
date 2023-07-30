@@ -21,6 +21,10 @@ final class ObjectSpriteManager: SpriteManager {
     }
     
     func redraw(world: World, in scene: SKScene) {
+        redraw(world: world, in: scene, selectedObject: nil, position: nil)
+    }
+    
+    func redraw(world: World, in scene: SKScene, selectedObject: Object?, position: Vector?) {
         cleanUp(world: world)
         
         for (objectPosition, object) in world.objects {
@@ -38,6 +42,12 @@ final class ObjectSpriteManager: SpriteManager {
                 break
             }
             
+        }
+        
+        if let selectedObject, let position {
+            let texture = getTextureNamed(selectedObject.sprite)
+            let color = selectedObject.canBuildInWorld(world, at: position) ? SKColor(calibratedRed: 0, green: 200, blue: 0, alpha: 0.5) : SKColor(calibratedRed: 200, green: 0, blue: 0, alpha: 0.5)
+            setObjectTexture(texture: texture, object: selectedObject, position: position, in: scene, color: color)
         }
     }
     

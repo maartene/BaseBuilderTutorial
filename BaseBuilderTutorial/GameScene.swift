@@ -61,7 +61,7 @@ class GameScene: SKScene {
         tileSpriteManager.redraw(world: world, in: self)
         entitySpriteManager.redraw(world: world, in: self)
         itemSpriteManager.redraw(world: world, in: self)
-        objectSpriteManager.redraw(world: world, in: self)
+        objectSpriteManager.redraw(world: world, in: self, selectedObject: viewModel.jobObject, position: viewModel.hoverCoord)
     }
     
     
