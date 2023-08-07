@@ -220,9 +220,9 @@ final class JobTests: XCTestCase {
         let requiredObject = Object(name: "Required Object")
         let requiredItem = Item(name: "Required Item")
         
-        let itemRequirement = Requirement.items(itemStack: ItemStack(item: requiredItem, amount: 2))
+        let itemRequirement = ItemsRequirement(itemStack: ItemStack(item: requiredItem, amount: 2))
         
-        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 2)), targetPosition: .right, buildTime: 1, requirements: [.position, .object(objectName: requiredObject.name), itemRequirement])
+        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 2)), targetPosition: .right, buildTime: 1, requirements: [PositionRequirement(), ObjectRequirement(objectName: requiredObject.name), itemRequirement])
         
         let world = World()
         world.objects[.right] = requiredObject

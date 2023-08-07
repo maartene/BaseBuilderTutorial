@@ -58,23 +58,17 @@ class ViewModel: ObservableObject {
             return nil
         }
     }
-    
 
-    
-    
-    
     var currentJobGoal: Job.JobGoal?
     
-    // We want to make sure we only show jobs that we have the items for in the world.
     private func canMeetItemRequirements(_ tile: Tile) -> Bool {
+        guard let world else {
+            return false
+        }
+        
         for requirement in tile.itemRequirements {
-            switch requirement {
-            case .items(let itemStack):
-                if world?.itemCount(itemStack.item) ?? 0 < itemStack.amount {
-                    return false
-                }
-            default:
-                break
+            if requirement.isMet(in: world, by: nil, at: .zero) == false {
+                return false
             }
         }
         return true

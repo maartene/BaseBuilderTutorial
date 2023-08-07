@@ -53,7 +53,7 @@ final class EntityTests: XCTestCase {
         XCTAssertEqual(world.tiles.count, 0)
         
         let entity = Entity(name: "Example Entity", position: .zero)
-        let job = Job(jobGoal: .changeTile(.Floor), targetPosition: .right, buildTime: 2, requirements: [.position])
+        let job = Job(jobGoal: .changeTile(.Floor), targetPosition: .right, buildTime: 2, requirements: [PositionRequirement()])
         entity.jobs.push(job)
         
         XCTAssertEqual(entity.jobs.peek()?.buildTime ?? 0, 2)
@@ -66,7 +66,7 @@ final class EntityTests: XCTestCase {
     func testMetRequirementsLowerCycleTime() {
         let world = World()
         let entity = Entity(name: "Example Entity", position: .zero)
-        let job = Job(jobGoal: .changeTile(.Wall), targetPosition: .zero, buildTime: 2, requirements: [.position])
+        let job = Job(jobGoal: .changeTile(.Wall), targetPosition: .zero, buildTime: 2, requirements: [PositionRequirement()])
         entity.jobs.push(job)
         
         world.setTile(position: .zero, tile: .Floor)
@@ -80,7 +80,7 @@ final class EntityTests: XCTestCase {
         let world = World()
         let requiredItem = Item(name: "REQUIRED ITEM")
         let entity = Entity(name: "Example Entity", position: .zero)
-        let job = Job(jobGoal: .changeTile(.Wall), targetPosition: .zero, buildTime: 1, requirements: [.items(itemStack: ItemStack(item: requiredItem, amount: 1))])
+        let job = Job(jobGoal: .changeTile(.Wall), targetPosition: .zero, buildTime: 1, requirements: [ItemsRequirement(itemStack: ItemStack(item: requiredItem, amount: 1))])
         entity.jobs.push(job)
         
         world.setTile(position: .zero, tile: .Floor)

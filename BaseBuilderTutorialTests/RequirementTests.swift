@@ -15,7 +15,7 @@ final class RequirementTests: XCTestCase {
         XCTAssertEqual(world.tiles.count, 0)
         
         let entity = Entity(name: "Example Entity", position: .zero)
-        let job = Job(jobGoal: .changeTile(.Floor), targetPosition: .right, buildTime: 2, requirements: [.position])
+        let job = Job(jobGoal: .changeTile(.Floor), targetPosition: .right, buildTime: 2, requirements: [PositionRequirement()])
         entity.jobs.push(job)
         
         XCTAssertEqual(entity.jobs.peek()?.buildTime ?? 0, 2)
@@ -45,7 +45,7 @@ final class RequirementTests: XCTestCase {
         
         let entity = Entity(name: "Example Entity", position: .zero)
         
-        let job = Job(jobGoal: .changeTile(.Floor), targetPosition: Vector.zero, requirements: [.items(itemStack: ItemStack(item: item, amount: 10))])
+        let job = Job(jobGoal: .changeTile(.Floor), targetPosition: Vector.zero, requirements: [ItemsRequirement(itemStack: ItemStack(item: item, amount: 10))])
         entity.jobs.push(job)
         
         XCTAssertEqual(entity.jobs.count, 1)
@@ -77,7 +77,7 @@ final class RequirementTests: XCTestCase {
         let itemToCraft = Item(name: "Example Item")
         let requiredObject = Object(name: "Workbench")
         
-        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 2)), targetPosition: .zero, buildTime: 1, requirements: [.object(objectName: requiredObject.name)])
+        let craftJob = Job(jobGoal: .craft(ItemStack(item: itemToCraft, amount: 2)), targetPosition: .zero, buildTime: 1, requirements: [ObjectRequirement(objectName: requiredObject.name)])
         
         let world = World()
         

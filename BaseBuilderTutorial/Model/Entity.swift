@@ -56,52 +56,39 @@ class Entity {
         }
     }
     
+    fileprivate func trySpawnFetchJob(for itemStack: ItemStack, in world: World) {
+        // spawn a 'fetch' job.
+        let inventoryAmount = inventoryFor(item: itemStack.item)
+        let fetchStack = ItemStack(item: itemStack.item, amount: itemStack.amount - inventoryAmount)
+        if let fetchLocation = world.getLocationWithItems(fetchStack) {
+            
+            jobs.push(Job.createFetchItemsJob(itemsToFetch: fetchStack, targetLocation: fetchLocation))
+            logger.debug("Entity \(self.name) created job \(self.jobs.peek()?.description ?? "nil")")
+        }
+    }
+    
     private func checkRequirements(for job: Job, in world: World) -> Bool {
         for requirement in job.requirements {
-            switch requirement {
-            case .position:
-                if position != job.targetPosition {
+            if let itemsRequirement = requirement as? ItemsRequirement {
+                if itemsRequirement.isMet(in: world, by: self, at: job.targetPosition) == false {
+                    logger.info("Did not meet itemsRequirement: \(itemsRequirement.description)")
+                    // TODO: extract function
+                    let itemStack = itemsRequirement.itemStack
+                    trySpawnFetchJob(for: itemStack, in: world)
+                    return false
+                }
+            } else if let positionRequirement = requirement as? PositionRequirement {
+                if positionRequirement.isMet(in: world, by: self, at: job.targetPosition) == false {
+                    logger.info("Did not meet PositionRequirement: \(positionRequirement.description)")
                     jobs.push(Job.createMoveToLocationJob(targetLocation: job.targetPosition))
                     logger.debug("Entity \(self.name) created job \(self.jobs.peek()?.description ?? "nil")")
                     return false
                 }
-            case .items(let itemStack):
-                let inventoryAmount = inventoryFor(item: itemStack.item)
-                if inventoryAmount < itemStack.amount {
-                    // spawn a 'fetch' job.
-                    let fetchStack = ItemStack(item: itemStack.item, amount: itemStack.amount - inventoryAmount)
-                    if let fetchLocation = world.getLocationWithItems(fetchStack) {
-                        
-                        jobs.push(Job.createFetchItemsJob(itemsToFetch: fetchStack, targetLocation: fetchLocation))
-                        logger.debug("Entity \(self.name) created job \(self.jobs.peek()?.description ?? "nil")")
-                    }
+            } else {
+                if requirement.isMet(in: world, by: self, at: job.targetPosition) == false {
+                    logger.info("Did not meet requirement: \(requirement.description)")
                     return false
                 }
-            case .noObject(let size):
-                for x in job.targetPosition.x ..< job.targetPosition.x + size.x {
-                    for y in job.targetPosition.y ..< job.targetPosition.y + size.y {
-                        if world.objectExistsAt(Vector(x: x, y: y)) {
-                            return false
-                        }
-                    }
-                }
-            case .tile(let allowedTiles):
-                if allowedTiles.contains(world.tiles[position, default: .void]) == false {
-                    return false
-                }
-            case .object(let objectName):
-                if world.objects[job.targetPosition]?.name ?? "" != objectName {
-                    return false
-                }
-            case .noItemStack:
-                if let existingItemStack = world.items[job.targetPosition] {
-                    if existingItemStack.amount != 0 {
-                        return false
-                    }
-                }
-            default:
-                logger.error("Unimplemented requirement.")
-                break
             }
         }
         
@@ -109,13 +96,8 @@ class Entity {
     }
     
     private func processRequirements(for job: Job) {
-        for requirement in job.requirements {
-            switch requirement {
-            case .items(let itemStack):
-                consumeItems(itemStack)
-            default:
-                break
-            }
+        for itemsRequirement in job.requirements.compactMap({ $0 as? ItemsRequirement }) {
+            consumeItems(itemsRequirement.itemStack)
         }
     }
     

@@ -27,16 +27,15 @@ struct Object {
     }
     
     func canBuildInWorld(_ world: World, at position: Vector) -> Bool {
-        for y in position.y ..< position.y + size.y {
-            for x in position.x ..< position.x + size.x {
-                let point = Vector(x: x, y: y)
-                let tile = world.tiles[point, default: .void]
-                if allowedTiles.contains(tile) == false || world.objectExistsAt(point) {
-                    return false
-                }
+        let testJob = Job.createInstallObjectJob(object: self, at: position)
+        
+        for requirement in testJob.requirements {
+            if requirement.isMet(in: world, by: nil, at: position) == false {
+                logger.info("Did not meet requirement: \(requirement.description)")
+                return false
             }
         }
-        
+
         return true
 
     }
