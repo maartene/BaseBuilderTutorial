@@ -72,11 +72,7 @@ struct ObjectRequirement: Requirement {
     let objectName: String
     
     func isMet(in world: World, by entity: Entity?, at position: Vector) -> Bool {
-        guard let entity else {
-            return false
-        }
-        
-        guard let object = world.objectAt(entity.position) else {
+        guard let object = world.objectAt(position) else {
             return false
         }
         
