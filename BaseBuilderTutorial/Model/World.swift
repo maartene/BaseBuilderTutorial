@@ -171,10 +171,10 @@ final class World {
                 if r == bottomLeft.y || r == topRight.y || c == bottomLeft.x || c == topRight.x {
                     //setTile(position: Vector(x: c, y: r), tile: .Wall)
                     // TODO: cleanup hard coded item here
-                    jobs.enqueue(Job(jobGoal: .changeTile(.Wall), targetPosition: Vector(x: c, y: r), requirements: [.position, .items(itemStack: ItemStack(item: Item(name: "Wooden Blocks"), amount: 2))]))
+                    jobs.enqueue(Job(jobGoal: .changeTile(.Wall), targetPosition: Vector(x: c, y: r), requirements: [PositionRequirement(), ItemsRequirement(itemStack: ItemStack(item: Item(name: "Wooden Blocks"), amount: 2))]))
                 } else {
                     //setTile(position: Vector(x: c, y: r), tile: .Floor)
-                    jobs.enqueue(Job(jobGoal: .changeTile(.Floor), targetPosition: Vector(x: c, y: r), requirements: [.position]))
+                    jobs.enqueue(Job(jobGoal: .changeTile(.Floor), targetPosition: Vector(x: c, y: r), requirements: [PositionRequirement()]))
                 }
             }
         }

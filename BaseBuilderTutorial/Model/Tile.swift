@@ -13,12 +13,12 @@ enum Tile: String {
     case Wall
     case Grass
     
-    var itemRequirements: [Requirement] {
+    var itemRequirements: [ItemsRequirement] {
         switch self {
         case .Floor:
-            return [Requirement.items(itemStack: ItemStack(item: .woodenBlocks, amount: 1))]
+            return [ItemsRequirement(itemStack: ItemStack(item: .woodenBlocks, amount: 1))]
         case .Wall:
-            return [Requirement.items(itemStack: ItemStack(item: .woodenBlocks, amount: 2))]
+            return [ItemsRequirement(itemStack: ItemStack(item: .woodenBlocks, amount: 2))]
         default:
             return []
         }

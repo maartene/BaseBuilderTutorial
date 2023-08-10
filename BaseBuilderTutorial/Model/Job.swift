@@ -69,24 +69,24 @@ extension Job {
     }
     
     static func createFetchItemsJob(itemsToFetch: ItemStack, targetLocation: Vector) -> Job {
-        Job(jobGoal: .fetchItems(itemsToFetch), targetPosition: targetLocation, buildTime: 1, requirements: [.position])
+        Job(jobGoal: .fetchItems(itemsToFetch), targetPosition: targetLocation, buildTime: 1, requirements: [PositionRequirement()])
     }
     
     static func createChangeTileJob(tile: Tile, at position: Vector) -> Job {
-        var requirements = [Requirement.position]
+        var requirements: [Requirement] = [PositionRequirement()]
         requirements.append(contentsOf: tile.itemRequirements)
         return Job(jobGoal: .changeTile(tile), targetPosition: position, buildTime: tile.buildTime, requirements: requirements)
     }
     
     static func createInstallObjectJob(object: Object, at position: Vector) -> Job {
         return Job(jobGoal: .installObject(object: object), targetPosition: position, buildTime: object.installTime, requirements: [
-                .noObject(size: object.size),
-                .items(itemStack: ItemStack(item: object.objectItem, amount: 1)),
-                .position,
-                .tile(allowedTiles: object.allowedTiles)])
+                NoObjectRequirement(size: object.size),
+                ItemsRequirement(itemStack: ItemStack(item: object.objectItem, amount: 1)),
+                PositionRequirement(),
+                TileRequirement(allowedTiles: object.allowedTiles)])
     }
     
     static func createStoreItemJob(item: Item, amount: Int, at position: Vector) -> Job {
-        return Job(jobGoal: .store(ItemStack(item: item, amount: amount)), targetPosition: position, requirements: [.position, .noItemStack])
+        return Job(jobGoal: .store(ItemStack(item: item, amount: amount)), targetPosition: position, requirements: [PositionRequirement(), NoItemStackRequirement()])
     }
 }

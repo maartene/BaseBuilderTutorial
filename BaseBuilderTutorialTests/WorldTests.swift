@@ -129,7 +129,9 @@ final class WorldTests: XCTestCase {
     func test_object_canBuildInWorld() {
         let testObject = Object(name: "Test Object", allowedTiles: [.void])
         let world = World()
-        XCTAssertTrue(testObject.canBuildInWorld(world, at: .zero))
+        world.items[.up] = ItemStack(item: testObject.objectItem, amount: 4)
+        let result = testObject.canBuildInWorld(world, at: .zero)
+        XCTAssertTrue(result)
     }
     
     func test_object_canBuildInWorld_failsForNonEmptyTile() {

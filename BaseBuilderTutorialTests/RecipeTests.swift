@@ -37,14 +37,7 @@ final class RecipeTests: XCTestCase {
         
         XCTAssertEqual(job.targetPosition, .right)
         
-        XCTAssertTrue(job.requirements.contains(where: { requirement in
-            switch requirement {
-            case .position:
-                return true
-            default:
-                return false
-            }
-        }))
+        XCTAssertGreaterThan(job.requirements.compactMap( {$0 as? PositionRequirement }).count, 0)
     }
     
     // Item requirements
@@ -53,26 +46,13 @@ final class RecipeTests: XCTestCase {
         
         let job = recipe.createJob(at: .zero)
         
-        guard let itemsRequirement = job.requirements.first(where: { requirement in
-            switch requirement {
-            case .items:
-                return true
-            default:
-                return false
-            }
-        }) else {
+        guard let itemsRequirement = job.requirements.compactMap({$0 as? ItemsRequirement}).first else {
             XCTFail("Expected at least an items requirement.")
             return
         }
-        
-        guard case .items(let itemStack) = itemsRequirement else {
-            XCTFail("\(itemsRequirement) should be an items requirement.")
-            return
-        }
-        
-        XCTAssertEqual(itemStack.item, inputItem)
-        XCTAssertEqual(itemStack.amount, 4)
-
+                
+        XCTAssertEqual(itemsRequirement.itemStack.item, inputItem)
+        XCTAssertEqual(itemsRequirement.itemStack.amount, 4)
     }
     
     // Object exists in the world requirement
@@ -81,24 +61,12 @@ final class RecipeTests: XCTestCase {
         
         let job = recipe.createJob(at: .zero)
         
-        guard let objectRequirement = job.requirements.first(where: { requirement in
-            switch requirement {
-            case .object:
-                return true
-            default:
-                return false
-            }
-        }) else {
+        guard let objectRequirement = job.requirements.compactMap({$0 as? ObjectRequirement}).first else {
             XCTFail("Expected at least an object requirement.")
             return
         }
         
-        guard case .object(let objectName) = objectRequirement else {
-            XCTFail("\(objectRequirement) should be an object requirement.")
-            return
-        }
-        
-        XCTAssertEqual(objectName, testObject.name)
+        XCTAssertEqual(objectRequirement.objectName, testObject.name)
 
     }
     

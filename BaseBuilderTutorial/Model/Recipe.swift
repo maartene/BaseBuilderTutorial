@@ -46,7 +46,7 @@ struct Recipe {
     }
     
     var requirements: [Requirement] {
-        var result: [Requirement] = [.position, .object(objectName: object.name)]
+        var result: [Requirement] = [PositionRequirement(), ObjectRequirement(objectName: object.name)]
         
         result.append(contentsOf: itemRequirements)
         
@@ -55,7 +55,7 @@ struct Recipe {
     
     var itemRequirements: [Requirement] {
         requiredItems.map { itemStack in
-            Requirement.items(itemStack: itemStack)
+            ItemsRequirement(itemStack: itemStack)
         }
     }
 }
