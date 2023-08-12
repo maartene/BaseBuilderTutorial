@@ -85,6 +85,8 @@ class ViewModel: ObservableObject {
             createChangeTileJobs(tile: tile)
         case .installObject(let object):
             createInstallObjectJob(object: object)
+        case .cancelJobs:
+            cancelJobs()
         default:
             logger.warning("Not supported jobgoal \(currentJobGoal).")
         }
@@ -118,6 +120,22 @@ class ViewModel: ObservableObject {
             }
         default:
             logger.info("No current selection ")
+        }
+    }
+    
+    private func cancelJobs() {
+        switch selectionModus {
+        case .selectSquare:
+            world?.jobs.removeAll(where: { job in
+                selectedTiles.contains(job.targetPosition)
+            })
+        case .selectSingle:
+            // Note: this should not happen, but who knows.
+            if let selectedTile = selectedTiles.first {
+                world?.jobs.removeAll(where: { job in
+                    job.targetPosition == selectedTile
+                })
+            }
         }
     }
 }

@@ -46,3 +46,9 @@ extension Queue: Collection {
         }
     }
 }
+
+extension Queue {
+    mutating func removeAll(where predicate: ((T) -> Bool)) {
+        storage.removeAll(where: predicate)
+    }
+}

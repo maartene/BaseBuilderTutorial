@@ -27,6 +27,7 @@ struct Job {
         case installObject(object: Object)
         case craft(ItemStack)
         case store(ItemStack)
+        case cancelJobs
     }
 }
 
@@ -57,6 +58,8 @@ extension Job.JobGoal: CustomStringConvertible {
             return "Craft \(itemStack.amount) \(itemStack.item.name)"
         case .store(let itemStack):
             return "Store \(itemStack.amount) \(itemStack.item.name)"
+        case .cancelJobs:
+            return "Cancel jobs"
         }
     }
 }
