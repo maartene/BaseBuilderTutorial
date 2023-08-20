@@ -56,7 +56,7 @@ struct GUI: View {
                 Button(action: {
                     print("Cancel jobs")
                     viewModel.selectionModus = .selectSquare
-                    viewModel.currentJobGoal = Job.JobGoal.cancelJobs
+                    viewModel.currentIntendedAction = .cancelJobs
                 }, label: {
                     Text("Cancel Jobs")
                 }).disabled(viewModel.world?.jobs.count ?? 0 == 0)
