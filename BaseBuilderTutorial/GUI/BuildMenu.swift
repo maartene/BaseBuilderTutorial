@@ -16,7 +16,7 @@ struct BuildMenu: View {
             ForEach(viewModel.buildJobGoals, id: \.jobGoal.description) { jobGoalAvailable in
                 Button(action: {
                     logger.debug("\(jobGoalAvailable.jobGoal) clicked")
-                    viewModel.currentJobGoal = jobGoalAvailable.jobGoal
+                    viewModel.currentIntendedAction = .scheduleJob(jobGoalAvailable.jobGoal)
                     viewModel.selectionModus = .selectSquare
                     subMenuState = .none
                 }, label: {

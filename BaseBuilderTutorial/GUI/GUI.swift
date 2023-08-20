@@ -53,6 +53,13 @@ struct GUI: View {
                 }, label: {
                     Text("Objects")
                 }).disabled(subMenuState == .installObject)
+                Button(action: {
+                    print("Cancel jobs")
+                    viewModel.selectionModus = .selectSquare
+                    viewModel.currentIntendedAction = .cancelJobs
+                }, label: {
+                    Text("Cancel Jobs")
+                }).disabled(viewModel.world?.jobs.count ?? 0 == 0)
                 Spacer()
             }
             .padding()

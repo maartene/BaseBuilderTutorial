@@ -144,7 +144,7 @@ final class World {
         
         
         let entity = Entity(name: "Worker", position: .zero)
-        newWorld.entities = [entity]
+        //newWorld.entities = [entity]
         
         newWorld.items[.right] = ItemStack(item: .woodenBlocks, amount: 100)
         newWorld.items[.down] = ItemStack(item: .food, amount: 10)

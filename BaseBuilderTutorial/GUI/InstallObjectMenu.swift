@@ -17,7 +17,7 @@ struct InstallObjectMenu: View {
                 Button(action: {
                     logger.info("\(jobGoalAvailable.jobGoal) clicked")
                     viewModel.selectionModus = .selectSingle
-                    viewModel.currentJobGoal = jobGoalAvailable.jobGoal
+                    viewModel.currentIntendedAction = .scheduleJob(jobGoalAvailable.jobGoal)
                     subMenuState = .none
                 }, label: {
                     Text(jobGoalAvailable.jobGoal.description)

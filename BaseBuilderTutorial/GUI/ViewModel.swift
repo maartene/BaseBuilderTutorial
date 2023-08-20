@@ -13,6 +13,11 @@ enum SelectionModus {
     case selectSquare
 }
 
+enum IntendedAction {
+    case scheduleJob(Job.JobGoal)
+    case cancelJobs
+}
+
 class ViewModel: ObservableObject {
     weak var world: World?
     
@@ -59,7 +64,15 @@ class ViewModel: ObservableObject {
         }
     }
 
-    var currentJobGoal: Job.JobGoal?
+    var currentIntendedAction: IntendedAction?
+    
+    var currentJobGoal: Job.JobGoal? {
+        guard case .scheduleJob(let jobGoal) = currentIntendedAction else {
+            return nil
+        }
+            
+        return jobGoal
+    }
     
     private func canMeetItemRequirements(_ tile: Tile) -> Bool {
         guard let world else {
@@ -75,21 +88,27 @@ class ViewModel: ObservableObject {
     }
     
     func finishSelection() {
-        guard let currentJobGoal else {
-            logger.debug("No current job goal, can't create job.")
+        
+        guard let currentIntendedAction else {
+            logger.debug("No current intended action, nothing to do.")
             return
         }
         
-        switch currentJobGoal {
-        case .changeTile(let tile):
-            createChangeTileJobs(tile: tile)
-        case .installObject(let object):
-            createInstallObjectJob(object: object)
-        default:
-            logger.warning("Not supported jobgoal \(currentJobGoal).")
+        switch currentIntendedAction {
+        case .scheduleJob(let currentJobGoal):
+            switch currentJobGoal {
+            case .changeTile(let tile):
+                createChangeTileJobs(tile: tile)
+            case .installObject(let object):
+                createInstallObjectJob(object: object)
+            default:
+                logger.warning("Not supported jobgoal \(currentJobGoal).")
+            }
+        case .cancelJobs:
+            cancelJobs()
         }
         
-        self.currentJobGoal = nil
+        self.currentIntendedAction = nil
         selectedTiles.removeAll()
         self.selectionModus = .selectSingle
     }
@@ -118,6 +137,22 @@ class ViewModel: ObservableObject {
             }
         default:
             logger.info("No current selection ")
+        }
+    }
+    
+    private func cancelJobs() {
+        switch selectionModus {
+        case .selectSquare:
+            world?.jobs.removeAll(where: { job in
+                selectedTiles.contains(job.targetPosition)
+            })
+        case .selectSingle:
+            // Note: this should not happen, but who knows.
+            if let selectedTile = selectedTiles.first {
+                world?.jobs.removeAll(where: { job in
+                    job.targetPosition == selectedTile
+                })
+            }
         }
     }
 }
