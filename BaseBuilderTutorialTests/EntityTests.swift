@@ -91,4 +91,26 @@ final class EntityTests: XCTestCase {
         XCTAssertEqual(entity.inventory[requiredItem, default: 0], 9)
     }
     
+    func test_jobWithRequirements_thatCannotCurrentlyBeMetInTheWorld_isReEnqueuedInTheWorld() {
+        let world = World()
+        let entity = Entity(name: "Example Entity", position: .zero)
+        let itemToFetch = Item(name: "Item To Fetch")
+        let bottomJob = Job(jobGoal: .changeTile(.Wall), targetPosition: .zero, buildTime: 1, requirements: [])
+        let topJob = Job(jobGoal: .changeTile(.Wall), targetPosition: .zero, buildTime: 1, requirements: [ItemsRequirement(itemStack: ItemStack(item: itemToFetch, amount: 2))])
+        entity.jobs.push(bottomJob)
+        entity.jobs.push(topJob)
+        
+        XCTAssertEqual(entity.jobs.count, 2)
+        XCTAssertEqual(world.jobs.count, 0)
+        XCTAssertEqual(entity.jobs.peek()?.description ?? "", topJob.description)
+        
+        entity.update(in: world)
+        
+        XCTAssertEqual(entity.jobs.count, 1)
+        XCTAssertEqual(entity.jobs.peek()?.description ?? "", bottomJob.description)
+        XCTAssertEqual(world.jobs.count, 1)
+        XCTAssertEqual(world.jobs.peek()?.description ?? "", topJob.description)
+        
+    }
+    
 }
