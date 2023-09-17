@@ -50,9 +50,3 @@ extension Stack: Collection {
         }
     }
 }
-
-extension Stack {
-    mutating func tuck(_ element: T) {
-        storage.insert(element, at: 0)
-    }
-}
