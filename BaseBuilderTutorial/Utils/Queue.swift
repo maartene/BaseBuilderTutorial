@@ -24,6 +24,14 @@ struct Queue<T> {
         
         return storage.removeFirst()
     }
+    
+    func peek() -> T? {
+        guard storage.count > 0 else {
+            return nil
+        }
+        
+        return storage[0]
+    }
 }
 
 /// 20230105: seperated out the stuff that is required for `Collection` protocol conformance.

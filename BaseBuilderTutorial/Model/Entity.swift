@@ -8,6 +8,12 @@
 import Foundation
 
 class Entity {
+    enum CheckRequirementsResult {
+        case met
+        case unmet
+        case impossibleToMeetInCurrentWorldState
+    }
+    
     let name: String
     var position: Vector
     let sprite: String
@@ -38,9 +44,16 @@ class Entity {
         }
         
         logger.debug("Entity \(self.name) works on job \(currentJob)")
-        
-        guard checkRequirements(for: currentJob, in: world) else {
+         
+        switch checkRequirements(for: currentJob, in: world) {
+        case .met:
+            break
+        case .unmet:
             logger.debug("Did not meet requirements for \(currentJob)")
+            return
+        case .impossibleToMeetInCurrentWorldState:
+            _ = jobs.pop()
+            world.jobs.enqueue(currentJob)
             return
         }
                 
@@ -56,43 +69,47 @@ class Entity {
         }
     }
     
-    fileprivate func trySpawnFetchJob(for itemStack: ItemStack, in world: World) {
+    fileprivate func trySpawnFetchJob(for itemStack: ItemStack, in world: World) -> Job? {
         // spawn a 'fetch' job.
         let inventoryAmount = inventoryFor(item: itemStack.item)
         let fetchStack = ItemStack(item: itemStack.item, amount: itemStack.amount - inventoryAmount)
-        if let fetchLocation = world.getLocationWithItems(fetchStack) {
-            
-            jobs.push(Job.createFetchItemsJob(itemsToFetch: fetchStack, targetLocation: fetchLocation))
-            logger.debug("Entity \(self.name) created job \(self.jobs.peek()?.description ?? "nil")")
+        guard let fetchLocation = world.getLocationWithItems(fetchStack) else {
+            return nil
         }
+        
+        return Job.createFetchItemsJob(itemsToFetch: fetchStack, targetLocation: fetchLocation)
+        
     }
     
-    private func checkRequirements(for job: Job, in world: World) -> Bool {
+    private func checkRequirements(for job: Job, in world: World) -> CheckRequirementsResult {
         for requirement in job.requirements {
             if let itemsRequirement = requirement as? ItemsRequirement {
                 if itemsRequirement.isMet(in: world, by: self, at: job.targetPosition) == false {
                     logger.info("Did not meet itemsRequirement: \(itemsRequirement.description)")
-                    // TODO: extract function
                     let itemStack = itemsRequirement.itemStack
-                    trySpawnFetchJob(for: itemStack, in: world)
-                    return false
+                    guard let fetchJob = trySpawnFetchJob(for: itemStack, in: world) else {
+                        return .impossibleToMeetInCurrentWorldState
+                    }
+                    jobs.push(fetchJob)
+                    logger.debug("Entity \(self.name) created job \(fetchJob.description)")
+                    return .unmet
                 }
             } else if let positionRequirement = requirement as? PositionRequirement {
                 if positionRequirement.isMet(in: world, by: self, at: job.targetPosition) == false {
                     logger.info("Did not meet PositionRequirement: \(positionRequirement.description)")
                     jobs.push(Job.createMoveToLocationJob(targetLocation: job.targetPosition))
                     logger.debug("Entity \(self.name) created job \(self.jobs.peek()?.description ?? "nil")")
-                    return false
+                    return .unmet
                 }
             } else {
                 if requirement.isMet(in: world, by: self, at: job.targetPosition) == false {
                     logger.info("Did not meet requirement: \(requirement.description)")
-                    return false
+                    return .unmet
                 }
             }
         }
         
-        return true
+        return .met
     }
     
     private func processRequirements(for job: Job) {
